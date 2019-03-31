@@ -4,10 +4,31 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
-} from 'react-native';
+  TouchableOpacity,
+  TouchableHighlight
+} from 'react-native'; 
+
+import EditProfile from '../screens/EditProfile'
 
 export default class Profile extends Component {
+
+  constructor(props){
+    super(props);
+    state = {
+      name: '',
+      email:'',
+      bio:'',
+      photo:''
+    }
+
+  }
+
+// navigateToScreen = (route) => {
+//     const navigationAction = NavigationActions.navigate({
+//         routeName: route
+//     })
+//     this.props.navigation.dispatch(navigationAction)
+// }
 
   render() {
     return (
@@ -20,12 +41,18 @@ export default class Profile extends Component {
               <Text style={styles.info}>UX Designer / Mobile developer</Text>
               <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
               
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Opcion 1</Text>  
+              <TouchableOpacity style={styles.buttonContainer} 
+                onPress={ () => this.props.navigation.navigate("EditProfile")}>
+                <Text>Editar Perfil</Text>  
               </TouchableOpacity>              
               <TouchableOpacity style={styles.buttonContainer}>
                 <Text>Opcion 2</Text> 
               </TouchableOpacity>
+
+              <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate("HomeScreen")}>
+            <Text>Crear cuenta</Text>
+        </TouchableHighlight>
+
             </View>
         </View>
       </View>
@@ -36,7 +63,7 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   header:{
     backgroundColor: "#00BFFF",
-    height:200,
+    height:100,
   },
   avatar: {
     width: 130,
@@ -47,7 +74,7 @@ const styles = StyleSheet.create({
     marginBottom:10,
     alignSelf:'center',
     position: 'absolute',
-    marginTop:130
+    marginTop:30
   },
   name:{
     fontSize:22,
@@ -62,11 +89,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding:30,
   },
-  name:{
-    fontSize:28,
-    color: "#696969",
-    fontWeight: "600"
-  },
+  // name:{
+  //   fontSize:28,
+  //   color: "#696969",
+  //   fontWeight: "600"
+  // },
   info:{
     fontSize:16,
     color: "#00BFFF",

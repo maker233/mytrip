@@ -17,7 +17,7 @@ export default class LoginView extends Component {
   constructor(props) {
     super(props);
     state = {
-      username: '',
+      email: '',
       password: '',
     };
     this.service = new AuthService();
@@ -29,15 +29,16 @@ export default class LoginView extends Component {
   // }
 
   onSubmitListener = (event) => {
+    console.log(this.state)
     
-    const username = this.state.username;
-    // console.log(this.state.username)
+    const email = this.state.email;
     const password = this.state.password;
-    this.service.login(username, password)
+    this.service.login(email, password)
         .then(response => {
-            this.setState({ username: "", password: "" });
-            this.props.setUser(response)
-            window.location.assign('/coasters')
+            this.setState({ email: "", password: "" });
+            this.props.setUser(response),
+            () => this.props.navigation.navigate("Main")
+            
         })
         .catch(error => console.log(error))
 }
@@ -46,7 +47,13 @@ export default class LoginView extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.space}>
-          <Text>BIENVENIDO A LA APP</Text> 
+          <Image style={styles.welcomeImage} source={{uri: 'https://cdn.dribbble.com/users/449035/screenshots/5612222/mr_worldwide.gif'}}/>
+          
+        </View>
+
+
+        <View style={styles.space}>
+          <Text>BIENVENIDO A MyTrip</Text> 
         </View>
 
         <View style={styles.inputContainer}>
@@ -67,7 +74,7 @@ export default class LoginView extends Component {
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.service.sayHello()}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onSubmitListener()}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight>
 
@@ -75,7 +82,7 @@ export default class LoginView extends Component {
             <Text>¿Has olvidado tu contraseña?</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('register')}>
+        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate("Signin")}>
             <Text>Crear cuenta</Text>
         </TouchableHighlight>
       </View>
@@ -130,5 +137,12 @@ const styles = StyleSheet.create({
   },
   space: {
     marginBottom:20
-  }
+  },
+  welcomeImage: {
+    width: 300,
+    height: 180,
+    resizeMode: 'contain',
+    marginTop: -50,
+    marginLeft: 0,
+  },
 });

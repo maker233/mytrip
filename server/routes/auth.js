@@ -7,6 +7,9 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+router.get("/hello", (req, res)=>{
+    console.log("hola")
+})
 
 router.post("/login", (req, res, next) => {
   passport.authenticate('local', (err, theUser, failureDetails) => {
@@ -35,17 +38,14 @@ router.post("/login", (req, res, next) => {
 })(req, res, next);
 });
 
-router.get("/hello", (req, res)=>{
-    console.log("hola")
-})
-
 router.post("/signup", (req, res, next) => {
   console.log(req.body)
-  const username = req.body.email;
+  const name = req.body.name;
+  const email = req.body.email;
   const password = req.body.password;
 
-    if (!username || !password) {
-        res.status(400).json({ message: 'Introduce tanto el nombre como la contraseña.' });
+    if (!email || !password) {
+        res.status(400).json({ message: 'Introduce tanto el email como la contraseña.' });
         return;
     }
 
@@ -54,7 +54,7 @@ router.post("/signup", (req, res, next) => {
     //     return;
     // }
 
-    User.findOne({ username }, (err, foundUser) => {
+    User.findOne({ email }, (err, foundUser) => {
 
         if (err) {
             res.status(500).json({ message: "Ha ocurrido un error al comprobar el usuario." });
@@ -70,7 +70,8 @@ router.post("/signup", (req, res, next) => {
         const hashPass = bcrypt.hashSync(password, salt);
 
         const aNewUser = new User({
-            username: username,
+            name: name,
+            email: email,
             password: hashPass
         });
 

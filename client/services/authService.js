@@ -5,7 +5,7 @@ export default class authService {
     constructor() {
 
         this.service = axios.create({
-            baseURL: "http://192.168.20.145:3000/api/",
+            baseURL: "http://192.168.1.130:3000/api/",
             withCredentials: true
         })
     }
@@ -15,10 +15,11 @@ export default class authService {
       .then(response => response.data)
     }
 
-    signup = (email, password) => {
-      console.log(email, password)
-        return this.service.post('/signup', { email, password })
+    signup = (name, email, password) => {
+      // console.log(email, password)
+        return this.service.post('/signup', { name, email, password })
             .then(response => response.data)
+            
     }
 
     loggedin = () => {
@@ -26,8 +27,8 @@ export default class authService {
             .then(response => response.data)
     }
 
-    login = (username, password) => {
-        return this.service.post('/login', { username, password })
+    login = (email, password) => {
+        return this.service.post('/login', { email, password })
             .then(response => response.data)
     }
 

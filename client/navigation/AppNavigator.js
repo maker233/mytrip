@@ -1,34 +1,42 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
+
+
 //Vistas
 import LoginScreen from "../screens/auth/Login"
 import SigninScreen from "../screens/auth/Singin"
+import EditProfileScreen from "../screens/EditProfile"
 
-// import PanelScreen from "../screens/Panel"
-// import RunsScreen from "../screens/Runs"
-// import ProfileScreen from "../screens/Profile"
+import StepsScreen from "../screens/Steps"
 
-// import StepScreen from "../screens/Stepstest"
 
+import RunTabNavigator from './RunNavigator';
 import MainTabNavigator from './MainTabNavigator';
+
 const LoginNavigator = createStackNavigator({ Login: LoginScreen });
 const SigninNavigator = createStackNavigator({ Signin: SigninScreen });
+const EditProfileNavigator = createStackNavigator({ EditProfile: EditProfileScreen });
+const StepsNavigator = createStackNavigator({ Steps: StepsScreen });
 
-// const PanelNavigator = createStackNavigator({ Panel: PanelScreen });
-// const ProfileNavigator = createStackNavigator({ Profile: ProfileScreen });
-// const RunsNavigator = createStackNavigator({ Runs: RunsScreen });
 // const StepsNavigator = createStackNavigator({ Steps: StepScreen });
 
 export default createAppContainer(createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  Login: LoginNavigator,
   Main: MainTabNavigator,
+  Run: RunTabNavigator,
+
+  Login: LoginNavigator,
   Signin: SigninNavigator,
-  // Panel: PanelNavigator,
-  // Panel: ProfileNavigator,
-  // Runs: RunsNavigator,
+  EditProfile: EditProfileNavigator,
+  Steps: StepsNavigator,
+
   // Steps: StepsNavigator,
 },{
-  initialRouteName: 'Signin'
+  initialRouteName: 'Main'
 }))
+
+// duda auth react native
+setUser = (userObj) => {
+  this.setState({loggedInUser: userObj})
+}

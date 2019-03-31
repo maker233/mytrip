@@ -4,17 +4,18 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
 
-import ProfileScreen from '../screens/Profile';
+
+import RankRunScreen from '../screens/Runs/RankRun';
 import RunsScreen from '../screens/Runs/Runs';
+import ChatScreen from '../screens/Runs/Chat';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Volver',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -27,16 +28,16 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const RankRunStack = createStackNavigator({
+  RankRun: RankRunScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+RankRunStack.navigationOptions = {
+  tabBarLabel: 'Ranking',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-trophy' : 'md-trophy'}
     />
   ),
 };
@@ -56,12 +57,12 @@ RunsStack.navigationOptions = {
 };
 
 
-const ProfileStack = createStackNavigator({
-  Profile: ProfileScreen,
+const ChatStack = createStackNavigator({
+  Chat: ChatScreen,
 });
 
-ProfileStack.navigationOptions = {
-  tabBarLabel: 'Perfil',
+ChatStack.navigationOptions = {
+  tabBarLabel: 'Chat',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -75,7 +76,7 @@ ProfileStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  RankRunStack,
   RunsStack,
-  ProfileStack,
+  ChatStack,
 });

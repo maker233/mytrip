@@ -2,54 +2,42 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
   TextInput,
-  Button,
-  TouchableHighlight,
+  View,
   Image,
-  Alert
-} from 'react-native';
+  TouchableHighlight,
+  TouchableOpacity,
+} from 'react-native'; 
 
-import AuthService from '../../services/authService';
+import UserService from '../services/userService';
 
-export default class SigninView extends Component {
 
-  constructor(props) {
+export default class Profile extends Component {
+
+  constructor(props){
     super(props);
     state = {
       name: '',
-      email: '',
+      email:'',
       password: '',
+      bio:'',
+      photo:''
     };
-    this.service = new AuthService();
-  }
+    this.service = new UserService();
 
-  componentDidMount() {
-    console.log("Componente montado")
   }
-
-  // onSubmitListener = (viewId) => {
-  //   Alert.alert("Alert", "Button pressed "+viewId);
-    
-  // }
 
   onSubmitListener = (event) => {
+    
     console.log(this.state)
-    const {name, email, password} = this.state
+    const {name, email, password, bio, photo} = this.state
 
-    this.service.signup(name, email, password)
-        .then(response => {
-            this.setState({ email: "", password: "" })
-            this.props.setUser(response)
-            
-            , () => this.props.navigation.navigate("EditProfile");
-            
-        })
+    this.service.updateUser({name, email, password, bio, photo})
+        .then(response => {() => this.props.setUser(response)})
         .catch(error => console.log(error))
 }
 
   render() {
-
     return (
       <View style={styles.container}>
         <View style={styles.space}>
@@ -57,13 +45,14 @@ export default class SigninView extends Component {
           
         </View>
         <View style={styles.space}>
-          <Text style={styles.space}>¡ REGÍSTRATE AHORA !</Text> 
+          <Text style={styles.space}>EDITA TU PERFIL</Text> 
         </View>
 
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/dusk/64/000000/user.png'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Nombre"
+              placeholder="Name"
+              // value={this.state.name}
               underlineColorAndroid='transparent'
               onChangeText={(name) => this.setState({name})}/>
         </View>
@@ -71,31 +60,55 @@ export default class SigninView extends Component {
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              // value={this.state.email}
               placeholder="Email"
+              // value={this.state.email}
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(email) => this.setState({email})}/>
         </View>
         
-
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
               placeholder="Password"
+              // value={this.state.password}
               secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Bio"
+              // value={this.state.bio}
+              underlineColorAndroid='transparent'
+              onChangeText={(bio) => this.setState({bio})}/>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Photo"
+              // value={this.state.photo}
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              onChangeText={(photo) => this.setState({photo})}/>
+        </View>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={(event) => this.onSubmitListener()}>
-          <Text style={styles.loginText}>REGISTRARME</Text>
+          <Text style={styles.loginText}>Editar Perfil</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate("Login")}>
-            <Text>Volver al Log in</Text>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={(event) => this.onSubmitListener()}>
+          <Text style={styles.loginText}>Eliminar cuenta</Text>
         </TouchableHighlight>
+
+        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate("Profile")}>
+            <Text>Volver al perfil</Text>
+        </TouchableHighlight>
+
+        
 
       </View>
     );
@@ -148,6 +161,13 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   space: {
-    marginBottom:20
-  }
+    marginBottom:5
+  },
+  welcomeImage: {
+    width: 100,
+    height: 80,
+    resizeMode: 'contain',
+    marginTop: 3,
+    marginLeft: 0,
+  },
 });
