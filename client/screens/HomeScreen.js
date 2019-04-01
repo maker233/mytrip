@@ -6,9 +6,24 @@ import {
   Image,
 } from 'react-native';
 
+import AuthService from '../services/authService';
+
 export default class HomeMenuView extends Component {
 
+  constructor() {
+    super()
+    this.state= {}
+    this.service = new AuthService()
+  }
+
+  componentDidMount() {
+    console.log("HomeScreen montado")
+    this.service.getUser()
+    .then(response => console.log(response))
+  }
+
   render() {
+
     return (
       <View style={styles.container}>
         <View style={styles.welcomeContainer}>

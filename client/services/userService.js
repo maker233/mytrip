@@ -15,11 +15,24 @@ export default class authService {
       .then(response => response.data)   
     }
 
-    updateUser = (username, password, name, bio, photo) => {
-      console.log(username, password, name, bio, photo)
-        return this.service.post('/profile/:id', {username, password, name, bio, photo})
+    getUser = () => {
+        return this.service.get('/getUser')
+        .then(response => response.data)
+      }
+
+    updateUser = (name, username, password, bio, photo) => {
+      console.log(name, username, password, bio, photo)
+        return this.service.post('/profile/:id', {name, username, password, bio, photo})
             .then(response => response.data)
             
+    }
+
+    getOneUser = idUser => {
+        return this.service.get(`getOneUser/${idUser}`, { withCredentials: true })
+        .then(res => {
+            console.log(res.data);
+            return res.data;
+        })
     }
 
     deleteUser = () => {

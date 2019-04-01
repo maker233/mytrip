@@ -1,8 +1,8 @@
 import Expo from "expo";
 import React from "react";
-import { Pedometer } from "expo";
-import { StyleSheet, Text, View } from "react-native";
+import { Pedometer, registerRootComponent } from "expo";
 
+import { StyleSheet, Text, View } from "react-native";
 
 export default class PedometerSensor extends React.Component {
   state = {
@@ -83,4 +83,6 @@ const styles = StyleSheet.create({
   }
 });
 
-// Expo.registerRootComponent(PedometerSensor);
+registerRootComponent(PedometerSensor);
+
+

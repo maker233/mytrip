@@ -7,8 +7,8 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-router.get("/hello", (req, res)=>{
-    console.log("hola")
+router.get("/getUser", (req, res)=>{
+    res.json(req.user)
 })
 
 router.post('/login', (req, res, next) => {
@@ -97,6 +97,13 @@ router.post("/signup", (req, res, next) => {
         });
     });
 });
+
+router.get("/getOneUser/:id", (req, res) => {
+    console.log(req.params.id)
+    User.findById(req.params.id)
+      .then(user => res.json(user))
+      .catch(err => console.log(err))
+  })
 
 router.get("/logout", (req, res) => {
   // req.logout() is defined by passport

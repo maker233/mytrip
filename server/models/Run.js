@@ -4,7 +4,7 @@ const Schema   = mongoose.Schema;
 const userSchema = new Schema({
   name: String,
   distance: Number,
-  usersRun: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  users: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 }, {
   timestamps: {
     createdAt: 'created_at',

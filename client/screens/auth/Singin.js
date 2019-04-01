@@ -16,7 +16,7 @@ export default class SigninView extends Component {
 
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       name: '',
       username: '',
       password: '',
@@ -39,7 +39,7 @@ export default class SigninView extends Component {
 
     this.service.signup(name, username, password)
         .then(response => {
-            this.setState({ name: "", username: "", password: "" })
+            this.setState({ name: "", username: "", password: "" }, ()=> this.props.navigation.navigate("Login"));
             this.props.setUser(response)
             
             , () => this.props.navigation.navigate("EditProfile");

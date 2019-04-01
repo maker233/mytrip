@@ -16,27 +16,49 @@ export default class Profile extends Component {
 
   constructor(props){
     super(props);
-    state = {
-      name: '',
-      email:'',
-      password: '',
-      bio:'',
-      photo:''
+    this.state = {
+      name:"",
+      username:"",
+      password:"",
+      bio:"",
+      photo:""
     };
     this.service = new UserService();
 
   }
 
+  
   onSubmitListener = (event) => {
     
-    console.log(this.state)
-    const {name, email, password, bio, photo} = this.state
+    // console.log(this.state)
+    const {name, username, password, bio, photo} = this.state
 
-    this.service.updateUser({name, email, password, bio, photo})
+    this.service.updateUser({name, username, password, bio, photo})
         .then(response => {() => this.props.setUser(response)})
         .catch(error => console.log(error))
 }
 
+  componentDidMount() {
+    console.log("Componente EditProfile montado")
+    
+    this.service.getUser()
+      .then(response => console.log(response))
+    
+    
+    this.service.getOneUser("5ca1e5cdd5ef5d10af5fd51f")
+      .then(response => {
+        // console.log(response.name)
+        this.setState({ 
+          name: response.name,
+          username: response.username,
+          password: response.password,
+          bio: response.bio,
+          photo:response.photo
+         })
+      })
+  }
+
+  
   render() {
     return (
       <View style={styles.container}>
@@ -52,7 +74,7 @@ export default class Profile extends Component {
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/dusk/64/000000/user.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="Name"
-              // value={this.state.name}
+              value={this.state.name}
               underlineColorAndroid='transparent'
               onChangeText={(name) => this.setState({name})}/>
         </View>
@@ -61,17 +83,17 @@ export default class Profile extends Component {
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
               placeholder="Email"
-              // value={this.state.email}
+              value={this.state.username}
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(username) => this.setState({username})}/>
         </View>
         
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
               placeholder="Password"
-              // value={this.state.password}
+              value={this.state.password}
               secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
@@ -81,7 +103,7 @@ export default class Profile extends Component {
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
               placeholder="Bio"
-              // value={this.state.bio}
+              value={this.state.bio}
               underlineColorAndroid='transparent'
               onChangeText={(bio) => this.setState({bio})}/>
         </View>
@@ -90,8 +112,8 @@ export default class Profile extends Component {
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
               placeholder="Photo"
-              // value={this.state.photo}
-              secureTextEntry={true}
+              value={this.state.photo}
+              
               underlineColorAndroid='transparent'
               onChangeText={(photo) => this.setState({photo})}/>
         </View>
@@ -100,7 +122,7 @@ export default class Profile extends Component {
           <Text style={styles.loginText}>Editar Perfil</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={(event) => this.onSubmitListener()}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.deleteButton]} onPress={(event) => this.service.deleteUser()}>
           <Text style={styles.loginText}>Eliminar cuenta</Text>
         </TouchableHighlight>
 
@@ -156,6 +178,9 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: "#00b5ec",
+  },
+  deleteButton: {
+    backgroundColor: "#FF0000",
   },
   loginText: {
     color: 'white',

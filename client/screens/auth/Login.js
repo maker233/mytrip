@@ -16,7 +16,7 @@ export default class LoginView extends Component {
 
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       email: '',
       password: '',
     };

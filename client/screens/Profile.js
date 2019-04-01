@@ -16,19 +16,27 @@ export default class Profile extends Component {
     super(props);
     state = {
       name: '',
-      email:'',
+      username:'',
       bio:'',
       photo:''
     }
 
   }
 
-// navigateToScreen = (route) => {
-//     const navigationAction = NavigationActions.navigate({
-//         routeName: route
-//     })
-//     this.props.navigation.dispatch(navigationAction)
-// }
+  // componentDidMount() {
+  //   // this.service.getOneUser(this.props.match.params.id)
+  //   this.service.getOneUser("5ca1e5cdd5ef5d10af5fd51f")
+  //     .then(response => {
+  //       console.log(response.bio)
+  //       this.setState({ 
+  //         name: response.name,
+  //         username: response.username,
+  //         password: response.password,
+  //         bio: response.bio,
+  //         photo:response.photo
+  //        })
+  //     })
+  // }
 
   render() {
     return (

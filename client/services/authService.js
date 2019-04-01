@@ -10,10 +10,15 @@ export default class authService {
         })
     }
 
-    sayHello = () => {
-      return this.service.get('/hello')
-      .then(response => response.data)
-    }
+    // sayHello = () => {
+    //   return this.service.get('/hello')
+    //   .then(response => response.data)
+    // }
+
+    getUser = () => {
+        return this.service.get('/getUser')
+        .then(response => response.data)
+      }
 
     signup = (name, username, password) => {
       // console.log(email, password)

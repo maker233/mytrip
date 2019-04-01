@@ -12,6 +12,8 @@ const bcryptSalt = 10;
 
 // CRUD Usuarios ---------------------------------
 
+
+
 router.get("/delete/:id", (req, res, next) => {
 
     User.findByIdAndRemove(req.params.id)
@@ -28,9 +30,9 @@ router.get("/delete/:id", (req, res, next) => {
 
 
 router.post("/profile/:id", (req, res, next) => {
-    const { name, username, password, bio } = req.body;
+    const { name, username, password, bio, photo } = req.body;
     console.log(req.body);
-    User.update({ _id: req.params.id }, { $set: { name, username, password } })
+    User.update({ _id: req.params.id }, { $set: { name, username, password, bio, photo } })
         .then(user => res.status(200).json(theUser))
         .catch(err => {
             console.log('Error while updating an user', err);
