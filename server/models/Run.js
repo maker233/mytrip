@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
-const userSchema = new Schema({
+const runSchema = new Schema({
   name: String,
-  distance: Number,
+  distance: { type: Number, default: 0 },
+  password: String,
+  maxusers: { type: Number, default: 0 },
+  photo: { type: String, default: "/images/popino.jpg" },
   users: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 }, {
   timestamps: {
@@ -12,5 +15,5 @@ const userSchema = new Schema({
   }
 });
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Run = mongoose.model('Run', runSchema);
+module.exports = Run;

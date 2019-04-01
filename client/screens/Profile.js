@@ -53,12 +53,14 @@ export default class Profile extends Component {
                 onPress={ () => this.props.navigation.navigate("EditProfile")}>
                 <Text>Editar Perfil</Text>  
               </TouchableOpacity>              
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Opcion 2</Text> 
+              <TouchableOpacity style={styles.buttonContainer}
+                onPress={ () => this.props.navigation.navigate("EditProfile")}>
+                <Text>Mis Rutas</Text> 
               </TouchableOpacity>
 
-              <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate("HomeScreen")}>
-            <Text>Crear cuenta</Text>
+              <TouchableHighlight style={styles.buttonContainer} 
+                onPress={() => this.props.navigation.navigate("HomeScreen")}>
+                <Text>Hacer Foto</Text>
         </TouchableHighlight>
 
             </View>

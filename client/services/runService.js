@@ -5,12 +5,12 @@ export default class runService {
     constructor() {
 
         this.service = axios.create({
-            baseURL: "http://192.168.43.136:3000/api/",
+            baseURL: "http://192.168.1.130:3000/api/",
             withCredentials: true
         })
     }
 
-    getCoasters = () => {
+    getRuns = () => {
         const promise = this.service.get("getAllRuns", { withCredentials: true })
             .then(res => {
                 return res.data
@@ -22,17 +22,16 @@ export default class runService {
         return promise;
     }
 
-    postNewCoaster = coaster => {
-        const promise = this.service.post("postRun", coaster, { withCredentials: true })
+    createRun = run => {
+        console.log(run)
+        return this.service.post("/createRun", run)
             .then(res => {
-                console.log(res);
-                return res.data;
-            })
-
-        return promise;
+            console.log(res);
+            return res.data;
+        })
     }
 
-    getOneCoaster = idCoaster => {
+    getOneRun = idCoaster => {
         const promise = this.service.get(`getOneRun/${idCoaster}`, { withCredentials: true })
             .then(res => {
                 console.log(res);

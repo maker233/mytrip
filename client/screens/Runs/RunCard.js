@@ -1,21 +1,42 @@
+//This is an example of Card View// 
 
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+//import react in our code. 
 
-const CoasterCard = run => {
+import { Text, View, StyleSheet } from 'react-native';
+//import all the components we are going to use.
 
+import { Card } from 'react-native-elements';
+//import Card
+
+export default class App extends React.Component {
+  render() {
     return (
-        <div className="col-lg-3 col-md-4 col-sm-6">
-            <div className="card">
-                <img className="card-img-top" src={run.photo} alt="Card image cap"></img>
-                <div className="card-body">
-                    <h5 className="card-title">{run.name}</h5>
-                    <p className="card-text">{run.description}</p>
-                    <Link className="btn btn-sm btn-outline-dark" to={`/coasters/${run.._id}`}>Ver detalles</Link>
-                </div>
-            </div>
-        </div>
-    )
+      <View style={styles.container}>
+        <Card title="Local Modules">
+        {/*react-native-elements Card*/}
+          <Text style={styles.paragraph}>
+            This is a card from the react-native-elements
+          </Text>
+        </Card>
+      </View>
+    );
+  }
 }
 
-export default CoasterCard
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 40,
+    backgroundColor: '#ecf0f1',
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#34495e',
+  },
+});

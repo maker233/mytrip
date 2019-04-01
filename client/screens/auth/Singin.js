@@ -24,9 +24,9 @@ export default class SigninView extends Component {
     this.service = new AuthService();
   }
 
-  componentDidMount() {
-    console.log("Componente montado")
-  }
+  // componentDidMount() {
+  //   console.log("Componente Sigin montado")
+  // }
 
   // onSubmitListener = (viewId) => {
   //   Alert.alert("Alert", "Button pressed "+viewId);
@@ -42,7 +42,7 @@ export default class SigninView extends Component {
             this.setState({ name: "", username: "", password: "" }, ()=> this.props.navigation.navigate("Login"));
             this.props.setUser(response)
             
-            , () => this.props.navigation.navigate("EditProfile");
+            // , () => this.props.navigation.navigate("EditProfile");
             
         })
         .catch(error => console.log(error))

@@ -3,7 +3,7 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
-const axios = require("axios");
+// const axios = require("axios");
  
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -42,4 +42,4 @@ router.post("/updateUser/", (req, res, next) => {
 
 
 
-module.exports = Router;
+module.exports = router;

@@ -15,7 +15,8 @@ router.get('/getAllRuns', (req, res, next) => {
 })
 
 
-router.post("/postRuns", (req, res) => {
+router.post("/createRun", (req, res) => {
+  console.log(req.body)
   Run.create(req.body)
     .then(data => res.json(data))
     .catch(err => console.log(err))

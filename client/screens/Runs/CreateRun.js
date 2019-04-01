@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native'; 
 
-import UserService from '../services/userService';
+import RunService from '../../services/runService';
 
 
 export default class Profile extends Component {
@@ -18,22 +18,25 @@ export default class Profile extends Component {
     super(props);
     state = {
       name: '',
-      email:'',
+      distance:'',
       password: '',
-      bio:'',
+      maxusers:'',
       photo:''
     };
-    this.service = new UserService();
+    this.service = new RunService();
 
   }
 
   onSubmitListener = (event) => {
     
     console.log(this.state)
-    const {name, email, password, bio, photo} = this.state
+    const {name, distance, password, maxusers, photo} = this.state
 
-    this.service.updateUser({name, email, password, bio, photo})
-        .then(response => {() => this.props.setUser(response)})
+    this.service.createRun({name, distance, password, maxusers, photo})
+        .then(response => {
+          this.setState({ name: "", distance: "", password: "", maxusers: "" , photo: ""}
+          , ()=> this.props.navigation.navigate("Runs"));           
+        })
         .catch(error => console.log(error))
 }
 
@@ -41,36 +44,36 @@ export default class Profile extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.space}>
-          <Image style={styles.welcomeImage} source={{uri: 'https://png.icons8.com/dusk/64/000000/user.png'}}/>
+          <Image style={styles.welcomeImage} source={{uri: 'https://img.icons8.com/dusk/64/000000/world-map.png'}}/>
           
         </View>
         <View style={styles.space}>
-          <Text style={styles.space}>EDITA TU PERFIL</Text> 
+          <Text style={styles.space}>CREA UNA RUTA</Text> 
         </View>
 
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/dusk/64/000000/user.png'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Name"
+              placeholder="Nombre de la Ruta"
               // value={this.state.name}
               underlineColorAndroid='transparent'
               onChangeText={(name) => this.setState({name})}/>
         </View>
 
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/color/64/000000/ruler.png'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Email"
+              placeholder="Distancia"
               // value={this.state.email}
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(distance) => this.setState({distance})}/>
         </View>
         
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/bubbles/50/000000/lock.png'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Password"
+              placeholder="Contraseña (opcional)"
               // value={this.state.password}
               secureTextEntry={true}
               underlineColorAndroid='transparent'
@@ -78,18 +81,18 @@ export default class Profile extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/color/48/000000/group-foreground-selected.png'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Bio"
+              placeholder="Número max. participantes"
               // value={this.state.bio}
               underlineColorAndroid='transparent'
-              onChangeText={(bio) => this.setState({bio})}/>
+              onChangeText={(maxusers) => this.setState({maxusers})}/>
         </View>
 
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/bubbles/50/000000/camera.png'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Photo"
+              placeholder="Imagen Principal"
               // value={this.state.photo}
               secureTextEntry={true}
               underlineColorAndroid='transparent'
@@ -97,11 +100,11 @@ export default class Profile extends Component {
         </View>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={(event) => this.onSubmitListener()}>
-          <Text style={styles.loginText}>Editar Perfil</Text>
+          <Text style={styles.loginText}>CREAR RUTA</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate("Profile")}>
-            <Text>Volver al perfil</Text>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate("Main")}>
+            <Text>Volver al Panel</Text>
         </TouchableHighlight>
 
         

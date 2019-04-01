@@ -1,164 +1,141 @@
-// import * as React from "react";
-// import { Card, Slider } from "react-native-elements";
-// import {
-//   Text,
-//   ScrollView,
-//   TextInput,
-//   SafeAreaView,
-//   View,
-//   FlatList
-// } from "react-native";
-// import { SearchListings } from "@abb/controller";
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  Dimensions,
+  Alert,
+  ScrollView
+} from 'react-native';
+import { Button } from 'react-native-elements';
 
-// interface State {
-//   name: string;
-//   guests: number;
-//   beds: number;
-// }
+export default class Craigslist extends Component {
 
-// export class FindListingsConnector extends React.PureComponent<{}, State> {
-//   state = {
-//     name: "",
-//     guests: 1,
-//     beds: 1
-//   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible:false,
+      userSelected:[],
+      data: [
+        {id:1,  name: "Ruta al Everest", image:"https://img.icons8.com/cotton/64/000000/mountain.png",           count:124.711},
+        {id:2,  name: "Viaje a la Luna", image:"https://img.icons8.com/nolan/64/000000/full-moon.png",       count:234.722},
+        {id:3,  name: "IronRun",         image:"https://img.icons8.com/dusk/64/000000/hexagon.png",        count:124.678} ,
+        {id:4,  name: "Vuelta al Mundo", image:"https://img.icons8.com/dusk/64/000000/globe-earth.png", count:324.723} ,
+        {id:5,  name: "Ruta de la Seda", image:"https://img.icons8.com/doodle/48/000000/historic-ship.png",    count:154.573} ,
+      ]
+    };
+  }
 
-//   render() {
-//     const { name, guests, beds } = this.state;
-//     return (
-//       <React.Fragment>
-//         <SafeAreaView />
-//         <TextInput
-//           style={{ fontSize: 20, width: "100%" }}
-//           placeholder="search..."
-//           onChangeText={text => this.setState({ name: text })}
-//           value={name}
-//         />
-//         <View style={{ alignItems: "stretch", justifyContent: "center" }}>
-//           <Slider
-//             value={guests}
-//             onValueChange={value => this.setState({ guests: value })}
-//             step={1}
-//             maximumValue={5}
-//           />
-//           <Text>Guests: {guests}</Text>
-//         </View>
-//         <View style={{ alignItems: "stretch", justifyContent: "center" }}>
-//           <Slider
-//             value={beds}
-//             onValueChange={value => this.setState({ beds: value })}
-//             step={1}
-//             maximumValue={5}
-//           />
-//           <Text>Beds: {beds}</Text>
-//         </View>
-//         <SearchListings
-//           variables={{ input: { name, guests, beds }, limit: 5, offset: 0 }}
-//         >
-//           {({ listings }) => (
-//             <FlatList
-//               ListFooterComponent={() => (
-//                 <View>
-//                   <Text>Footer</Text>
-//                 </View>
-//               )}
-//               data={listings}
-//               keyExtractor={({ id }) => `${id}-flc`}
-//               renderItem={({ item: l }) => (
-//                 <Card
-//                   title={l.name}
-//                   image={l.pictureUrl ? { uri: l.pictureUrl } : undefined}
-//                 >
-//                   <Text style={{ marginBottom: 10 }}>
-//                     owner: {l.owner.email}
-//                   </Text>
-//                 </Card>
-//               )}
-//             />
-//           )}
-//         </SearchListings>
-//       </React.Fragment>
-//     );
-//   }
-// }
+  clickEventListener = (item) => {
+    Alert.alert('Message', 'Item clicked. '+item.name);
+  }
 
 
-//MAPS -----------------------
+  render() {
+    return (
+      <View style={styles.container}>
+        <FlatList 
+          style={styles.contentList}
+          columnWrapperStyle={styles.listContainer}
+          data={this.state.data}
+          keyExtractor= {(item) => {
+            return item.id;
+          }}
+          renderItem={({item}) => {
+          return (
+            <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item)}}>
+              <Image style={styles.image} source={{uri: item.image}}/>
+              <View style={styles.cardContent}>
+                <Text style={styles.name}>   {item.name}</Text>
+                <Text style={styles.count}>Pasos: {item.count}</Text>
+                <TouchableOpacity style={styles.followButton} onPress={()=> this.clickEventListener(item)}>
+                  <Text style={styles.followButtonText}>APUNTARME</Text>  
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          )}}/>
+        <Button
+          title="CREAR NUEVA RUTA"
+          onPress={()=> this.props.navigation.navigate("CreateRun")}
+          
+        />
+    
+      </View>
+    );
+  }
+}
 
-// import React from 'react';
-// import { MapView } from 'expo';
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    marginTop:20,
+    backgroundColor:"#ebf0f7"
+  },
+  contentList:{
+    flex:1,
+  },
+  cardContent: {
+    marginLeft:20,
+    marginTop:10
+  },
+  image:{
+    width:90,
+    height:90,
+    borderRadius:45,
+    borderWidth:2,
+    borderColor:"#ebf0f7"
+  },
 
-// export default class App extends React.Component {
-//   render() {
-//     return (
-//       <MapView
-//         style={{ flex: 1 }}
-//         initialRegion={{
-//           latitude: 37.78825,
-//           longitude: -122.4324,
-//           latitudeDelta: 0.0922,
-//           longitudeDelta: 0.0421,
-//         }}
-//       />
-//     );
-//   }
-// }
+  card:{
+    shadowColor: '#00000021',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 12,
 
-// CAMERA ----------------------
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop:20,
+    backgroundColor:"white",
+    padding: 10,
+    flexDirection:'row',
+    borderRadius:30,
+  },
 
-// import React from 'react';
-// import { Text, View, TouchableOpacity } from 'react-native';
-// import { Camera, Permissions } from 'expo';
-
-// export default class CameraExample extends React.Component {
-//   state = {
-//     hasCameraPermission: null,
-//     type: Camera.Constants.Type.back,
-//   };
-
-//   async componentDidMount() {
-//     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-//     this.setState({ hasCameraPermission: status === 'granted' });
-//   }
-
-//   render() {
-//     const { hasCameraPermission } = this.state;
-//     if (hasCameraPermission === null) {
-//       return <View />;
-//     } else if (hasCameraPermission === false) {
-//       return <Text>No access to camera</Text>;
-//     } else {
-//       return (
-//         <View style={{ flex: 1 }}>
-//           <Camera style={{ flex: 1 }} type={this.state.type}>
-//             <View
-//               style={{
-//                 flex: 1,
-//                 backgroundColor: 'transparent',
-//                 flexDirection: 'row',
-//               }}>
-//               <TouchableOpacity
-//                 style={{
-//                   flex: 0.1,
-//                   alignSelf: 'flex-end',
-//                   alignItems: 'center',
-//                 }}
-//                 onPress={() => {
-//                   this.setState({
-//                     type: this.state.type === Camera.Constants.Type.back
-//                       ? Camera.Constants.Type.front
-//                       : Camera.Constants.Type.back,
-//                   });
-//                 }}>
-//                 <Text
-//                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-//                   {' '}Flip{' '}
-//                 </Text>
-//               </TouchableOpacity>
-//             </View>
-//           </Camera>
-//         </View>
-//       );
-//     }
-//   }
-// }
+  name:{
+    fontSize:18,
+    flex:1,
+    alignSelf:'center',
+    color:"#3399ff",
+    fontWeight:'bold'
+  },
+  count:{
+    fontSize:14,
+    flex:1,
+    alignSelf:'center',
+    color:"#6666ff"
+  },
+  followButton: {
+    marginTop:10,
+    height:35,
+    width:100,
+    padding:10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:30,
+    backgroundColor: "white",
+    borderWidth:1,
+    borderColor:"#dcdcdc",
+  },
+  followButtonText:{
+    color: "#dcdcdc",
+    fontSize:12,
+  },
+});  
