@@ -11,40 +11,40 @@ router.get("/hello", (req, res)=>{
     console.log("hola")
 })
 
-router.post("/login", (req, res, next) => {
-  passport.authenticate('local', (err, theUser, failureDetails) => {
-    if (err) {
-        res.status(500).json({ message: 'Ha ocurrido un error en la autenticación.' });
-        return;
-    }
-
-    if (!theUser) {
-        // "failureDetails" contains the error messages
-        // from our logic in "LocalStrategy" { message: '...' }.
-        res.status(401).json(failureDetails);
-        return;
-    }
-
-    // save user in session
-    req.login(theUser, (err) => {
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, theUser, failureDetails) => {
         if (err) {
-            res.status(500).json({ message: 'Session save went bad.' });
+            res.status(500).json({ message: 'Something went wrong authenticating user' });
             return;
         }
 
-        // We are now logged in (that's why we can also send req.user)
-        res.status(200).json(theUser);
-    });
-})(req, res, next);
+        if (!theUser) {
+            // "failureDetails" contains the error messages
+            // from our logic in "LocalStrategy" { message: '...' }.
+            res.status(401).json(failureDetails);
+            return;
+        }
+
+        // save user in session
+        req.login(theUser, (err) => {
+            if (err) {
+                res.status(500).json({ message: 'Session save went bad.' });
+                return;
+            }
+
+            // We are now logged in (that's why we can also send req.user)
+            res.status(200).json(theUser);
+        });
+    })(req, res, next);
 });
 
 router.post("/signup", (req, res, next) => {
   console.log(req.body)
   const name = req.body.name;
-  const email = req.body.email;
+  const username = req.body.username;
   const password = req.body.password;
 
-    if (!email || !password) {
+    if (!username || !password) {
         res.status(400).json({ message: 'Introduce tanto el email como la contraseña.' });
         return;
     }
@@ -54,7 +54,7 @@ router.post("/signup", (req, res, next) => {
     //     return;
     // }
 
-    User.findOne({ email }, (err, foundUser) => {
+    User.findOne({ username }, (err, foundUser) => {
 
         if (err) {
             res.status(500).json({ message: "Ha ocurrido un error al comprobar el usuario." });
@@ -71,7 +71,7 @@ router.post("/signup", (req, res, next) => {
 
         const aNewUser = new User({
             name: name,
-            email: email,
+            username: username,
             password: hashPass
         });
 

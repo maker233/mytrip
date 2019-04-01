@@ -29,15 +29,15 @@ export default class LoginView extends Component {
   // }
 
   onSubmitListener = (event) => {
-    console.log(this.state)
+    // console.log(this.state)
     
-    const email = this.state.email;
+    const username = this.state.username;
     const password = this.state.password;
-    this.service.login(email, password)
+    this.service.login(username, password)
         .then(response => {
-            this.setState({ email: "", password: "" });
-            this.props.setUser(response),
-            () => this.props.navigation.navigate("Main")
+            this.setState({ email: "", password: "" }, ()=> this.props.navigation.navigate("Main"));
+            // this.props.setUser(response),
+            // () => 
             
         })
         .catch(error => console.log(error))
@@ -62,7 +62,7 @@ export default class LoginView extends Component {
               placeholder="Email"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(username) => this.setState({username})}/>
         </View>
         
         <View style={styles.inputContainer}>

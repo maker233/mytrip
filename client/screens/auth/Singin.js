@@ -18,7 +18,7 @@ export default class SigninView extends Component {
     super(props);
     state = {
       name: '',
-      email: '',
+      username: '',
       password: '',
     };
     this.service = new AuthService();
@@ -35,11 +35,11 @@ export default class SigninView extends Component {
 
   onSubmitListener = (event) => {
     console.log(this.state)
-    const {name, email, password} = this.state
+    const {name, username, password} = this.state
 
-    this.service.signup(name, email, password)
+    this.service.signup(name, username, password)
         .then(response => {
-            this.setState({ email: "", password: "" })
+            this.setState({ name: "", username: "", password: "" })
             this.props.setUser(response)
             
             , () => this.props.navigation.navigate("EditProfile");
@@ -75,7 +75,7 @@ export default class SigninView extends Component {
               placeholder="Email"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(username) => this.setState({username})}/>
         </View>
         
 
