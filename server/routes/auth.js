@@ -98,9 +98,9 @@ router.post("/signup", (req, res, next) => {
     });
 });
 
-router.get("/getOneUser/:id", (req, res) => {
-    console.log(req.params.id)
-    User.findById(req.params.id)
+router.get("/getOneUser/", (req, res) => {
+    // console.log(req.params.id)
+    User.findById(req.user._id)
       .then(user => res.json(user))
       .catch(err => console.log(err))
   })

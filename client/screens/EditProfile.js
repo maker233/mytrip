@@ -34,28 +34,32 @@ export default class Profile extends Component {
     const {name, username, password, bio, photo} = this.state
 
     this.service.updateUser({name, username, password, bio, photo})
-        .then(response => {() => this.props.setUser(response)})
+        .then(response => {() => {          
+          this.setState({ 
+            name: response.name,
+            username: response.username,
+            password: response.password, 
+            bio: response.bio,
+            photo:response.photo
+           })
+        }})
         .catch(error => console.log(error))
 }
 
   componentDidMount() {
     console.log("Componente EditProfile montado")
     
-    this.service.getUser()
-      .then(response => console.log(response))
-    
-    
-    this.service.getOneUser("5ca1e5cdd5ef5d10af5fd51f")
-      .then(response => {
-        // console.log(response.name)
-        this.setState({ 
-          name: response.name,
-          username: response.username,
-          password: response.password,
-          bio: response.bio,
-          photo:response.photo
-         })
-      })
+        this.service.getOneUser()
+        .then(response => {
+          // console.log(response.name)
+          this.setState({ 
+            name: response.name,
+            username: response.username,
+            password: response.password,
+            bio: response.bio,
+            photo:response.photo
+           })
+        })
   }
 
   

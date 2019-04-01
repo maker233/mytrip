@@ -33,7 +33,7 @@ export default createAppContainer(createSwitchNavigator({
 
   // Steps: StepsNavigator,
 },{
-  initialRouteName: 'Login'
+  initialRouteName: 'Main'
 }))
 
 // duda auth react native

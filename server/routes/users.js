@@ -4,7 +4,7 @@ const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
 const axios = require("axios");
-
+ 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -29,10 +29,10 @@ router.get("/delete/:id", (req, res, next) => {
 });
 
 
-router.post("/profile/:id", (req, res, next) => {
+router.post("/updateUser/", (req, res, next) => {
     const { name, username, password, bio, photo } = req.body;
     console.log(req.body);
-    User.update({ _id: req.params.id }, { $set: { name, username, password, bio, photo } })
+    User.update({ _id: req.user._id }, { $set: { name, username, password, bio, photo } })
         .then(user => res.status(200).json(theUser))
         .catch(err => {
             console.log('Error while updating an user', err);

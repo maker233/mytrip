@@ -33,7 +33,7 @@ export default class authService {
     }
 
     login = (username, password) => {
-        console.log(username, password)
+        console.log("Te has logeado")
         return this.service.post('/login', { username, password })
             .then(response => response.data)
     }

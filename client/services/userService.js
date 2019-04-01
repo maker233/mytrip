@@ -5,7 +5,7 @@ export default class authService {
     constructor() {
 
         this.service = axios.create({
-            baseURL: "http://192.168.43.136:3000/api/",
+            baseURL: "http://192.168.43.136:3000/api/", 
             withCredentials: true
         })
     }
@@ -22,13 +22,13 @@ export default class authService {
 
     updateUser = (name, username, password, bio, photo) => {
       console.log(name, username, password, bio, photo)
-        return this.service.post('/profile/:id', {name, username, password, bio, photo})
+        return this.service.post('/updateUser', {name, username, password, bio, photo})
             .then(response => response.data)
             
     }
 
     getOneUser = idUser => {
-        return this.service.get(`getOneUser/${idUser}`, { withCredentials: true })
+        return this.service.get(`getOneUser/`, { withCredentials: true })
         .then(res => {
             console.log(res.data);
             return res.data;
