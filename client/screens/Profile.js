@@ -61,7 +61,12 @@ export default class Profile extends Component {
               <TouchableHighlight style={styles.buttonContainer} 
                 onPress={() => this.props.navigation.navigate("HomeScreen")}>
                 <Text>Hacer Foto</Text>
-        </TouchableHighlight>
+              </TouchableHighlight>
+
+              <TouchableHighlight style={styles.buttonLogoutContainer} 
+                onPress={() => this.props.navigation.navigate("Login")}>
+                <Text>Salir</Text>
+              </TouchableHighlight>
 
             </View>
         </View>
@@ -126,4 +131,15 @@ const styles = StyleSheet.create({
     borderRadius:30,
     backgroundColor: "#00BFFF",
   },
+  buttonLogoutContainer:{
+    marginTop:10,
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+    backgroundColor: "#ED2939"
+  }
 });

@@ -1,7 +1,24 @@
 import React, {Component} from 'react';
 import {ProgressBarAndroid, AppRegistry, StyleSheet, View} from 'react-native';
 
+import RunService from '../../services/runService';
+
 export default class RunView extends Component {
+  constructor(props) {
+
+    super(props)
+
+    this.state = { run: {} }
+
+    this.service = new RunService();
+}
+
+componentDidMount() {
+
+    this.service.getOneRun(this.props.match.params.id)
+        .then(response => this.setState({ coaster: response }))
+}
+
   render() {
     return (
       <View style={styles.container}>

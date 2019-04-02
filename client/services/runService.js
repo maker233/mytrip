@@ -5,29 +5,28 @@ export default class runService {
     constructor() {
 
         this.service = axios.create({
-            baseURL: "http://192.168.1.130:3000/api/",
+            baseURL: "http://192.168.43.136:3000/api/",
             withCredentials: true
         })
     }
 
-    getRuns = () => {
-        const promise = this.service.get("getAllRuns", { withCredentials: true })
-            .then(res => {
-                return res.data
-            })
-            .catch(err => {
-                console.log(err)
-            })
-
-        return promise;
+    getAllRuns = () => {
+        return this.service.get("getAllRuns")
+        .then(res => {
+            // console.log(res.data)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     createRun = run => {
-        console.log(run)
-        return this.service.post("/createRun", run)
-            .then(res => {
-            console.log(res);
-            return res.data;
+        //console.log(run)
+        return this.service.post('/createRun', run)
+            .then(response => {
+            console.log(response.data);
+            return response.data;
         })
     }
 
@@ -41,13 +40,11 @@ export default class runService {
         return promise;
     }
 
-
-    handleUpload = theFile => {
-
-        console.log('file in service: ', theFile)
-
-        return this.service.post('/upload', theFile)
-            .then(res => res.data)
-            .catch(err => console.log(err));
+    addMeRun = itemid => {
+        return this.service.post('/addMeRun', {itemid})
+            .then(response => {
+            console.log(response.data);
+            return response.data;
+        })
     }
 }

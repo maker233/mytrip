@@ -7,6 +7,7 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native'; 
 
 import UserService from '../services/userService';
@@ -65,7 +66,7 @@ export default class Profile extends Component {
   
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View style={styles.space}>
           <Image style={styles.welcomeImage} source={{uri: 'https://png.icons8.com/dusk/64/000000/user.png'}}/>
           
@@ -136,7 +137,7 @@ export default class Profile extends Component {
 
         
 
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

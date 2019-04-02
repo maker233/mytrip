@@ -4,8 +4,8 @@ export default class authService {
 
     constructor() {
 
-        this.service = axios.create({
-            baseURL: "http://192.168.1.130:3000/api/",
+        this.service = axios.create({ 
+            baseURL: "http://192.168.43.136:3000/api/",
             withCredentials: true
         })
     }
@@ -27,10 +27,10 @@ export default class authService {
             
     }
 
-    loggedin = () => {
-        return this.service.get('/loggedin')
-            .then(response => response.data)
-    }
+    // loggedin = () => {
+    //     return this.service.get('/loggedin')
+    //         .then(response => response.data)
+    // }
 
     login = (username, password) => {
         console.log("Te has logeado")

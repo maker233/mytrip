@@ -16,10 +16,10 @@ router.get('/getAllRuns', (req, res, next) => {
 
 
 router.post("/createRun", (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   Run.create(req.body)
     .then(data => res.json(data))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err)) 
 })
 
 
@@ -30,6 +30,14 @@ router.get("/getOneRun/:id", (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.post("/addMeRun", (req, res) => {
+  // console.log(req.user.id)
+  // console.log(req.body.itemid)
+  Run.findByIdAndUpdate(req.body.itemid, {
+    $push: { users: req.user.id }})
+      .then(data => res.json(data))
+      .catch(err => console.log(err))
+})
 
 
 module.exports = router;

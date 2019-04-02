@@ -7,6 +7,7 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native'; 
 
 import RunService from '../../services/runService';
@@ -16,12 +17,12 @@ export default class Profile extends Component {
 
   constructor(props){
     super(props);
-    state = {
-      name: '',
-      distance:'',
+    this.state = {
+      name: 'Nombre Ruta',
+      distance:'0',
       password: '',
-      maxusers:'',
-      photo:''
+      maxusers:'100',
+      photo:'https://img.icons8.com/dusk/64/000000/globe-earth.png'
     };
     this.service = new RunService();
 
@@ -29,20 +30,20 @@ export default class Profile extends Component {
 
   onSubmitListener = (event) => {
     
-    console.log(this.state)
+    //console.log(this.state)
     const {name, distance, password, maxusers, photo} = this.state
 
     this.service.createRun({name, distance, password, maxusers, photo})
         .then(response => {
           this.setState({ name: "", distance: "", password: "", maxusers: "" , photo: ""}
-          , ()=> this.props.navigation.navigate("Runs"));           
+          , ()=> this.props.navigation.navigate("RunsStack"));           
         })
         .catch(error => console.log(error))
 }
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View style={styles.space}>
           <Image style={styles.welcomeImage} source={{uri: 'https://img.icons8.com/dusk/64/000000/world-map.png'}}/>
           
@@ -103,13 +104,13 @@ export default class Profile extends Component {
           <Text style={styles.loginText}>CREAR RUTA</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={() => this.props.navigation.navigate("Main")}>
-            <Text>Volver al Panel</Text>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate("RunsStack")}>
+            <Text>Volver a las Rutas</Text>
         </TouchableHighlight>
 
         
 
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
