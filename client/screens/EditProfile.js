@@ -48,7 +48,7 @@ export default class Profile extends Component {
 }
 
   componentDidMount() {
-    console.log("Componente EditProfile montado")
+    // console.log("Componente EditProfile montado")
     
         this.service.getOneUser()
         .then(response => {
