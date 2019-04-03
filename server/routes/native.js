@@ -6,10 +6,13 @@ const User = require('../models/User')
 
 
 router.post('/saveSteps', (req, res, next) => { 
-  console.log(req.user)
-  User.findByIdAndUpdate(req.user._id)
-    .then(data => res.json(data))
-    .catch(err => console.log(err))
+  // console.log("Voy a guardar los pasos de: ", req.body.steps)
+  
+  User.findByIdAndUpdate(req.user._id, {
+    $set: { stepstoday: req.body.steps }})
+      .then(data => res.json(data))
+      .catch(err => console.log(err))
 })
+
 
 module.exports = router;

@@ -75,7 +75,7 @@ export default class Runs extends Component {
             //   return (
             //   <RunCard />
             //   )}}
-            renderItem={({ item }) => <RunCard {...item}></RunCard>}
+            renderItem={({ item }) => <RunCard {...item} navigation={this.props.navigation}></RunCard>}
           />
         }
 

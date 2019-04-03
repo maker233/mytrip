@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import NativeService from '../services/nativeService';
+import RunService from '../services/runService';
 
 export default class PedometerSensor extends React.Component {
   constructor(){
@@ -19,18 +20,24 @@ export default class PedometerSensor extends React.Component {
       pastStepCount: 0,
       currentStepCount: 0
     };
+  this.runservice = new RunService()
   this.service = new NativeService()
   } 
 
   
   componentDidMount() {
     this._subscribe();
-    this.keepSteps();
+
   }
 
   keepSteps = () => {
-    this.service.sayHello();
+
     this.service.saveSteps(this.state.pastStepCount)
+    setInterval(() => {
+      this.service.saveSteps(this.state.pastStepCount)
+    },3600000)
+    this.runservice.updateRunDistances(this.state.pastStepCount);
+
   }
 
 
@@ -63,7 +70,7 @@ export default class PedometerSensor extends React.Component {
     start.setDate(end.getDate() - 1);
     Pedometer.getStepCountAsync(start, end).then(
       result => {
-        this.setState({ pastStepCount: result.steps });
+        this.setState({ pastStepCount: result.steps }, ()=> this.keepSteps());
       },
       error => {
         this.setState({

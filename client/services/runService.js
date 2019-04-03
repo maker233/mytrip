@@ -5,7 +5,7 @@ export default class runService {
     constructor() {
 
         this.service = axios.create({
-            baseURL: "http://192.168.1.130:3000/api/",
+            baseURL: "http://192.168.43.136:3000/api/",
             withCredentials: true
         })
     }
@@ -61,6 +61,14 @@ export default class runService {
 
     addMeRun = itemid => {
         return this.service.post('/addMeRun', {itemid})
+            .then(response => {
+            // console.log(response.data);
+            return response.data;
+        })
+    }
+
+    updateRunDistances = steps => {
+        return this.service.post('/updateRunDistance', {steps: steps})
             .then(response => {
             console.log(response.data);
             return response.data;
