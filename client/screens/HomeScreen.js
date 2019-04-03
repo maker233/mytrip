@@ -36,6 +36,7 @@ export default class PedometerSensor extends React.Component {
     setInterval(() => {
       this.service.saveSteps(this.state.pastStepCount)
     },3600000)
+    
     this.runservice.updateRunDistances(this.state.pastStepCount);
 
   }

@@ -14,6 +14,7 @@ import { Button } from 'react-native-elements';
 
 import RunCard from './RunCard'
 
+
 import RunService from '../../services/runService';
 
 export default class Runs extends Component {
@@ -40,19 +41,6 @@ export default class Runs extends Component {
         // console.log(this.state.runs)
       })
   }
-
-  // gotoRun = (item) => {
-  //   Alert.alert('Message', 'Item clicked. '+item.id);
-  // }
-
-  // addMeRun = (item) => {
-  //   // Alert.alert(item.id)
-
-  //   console.log(`Click en botón, este es el id:  `+item.id)
-  //   this.service.addMeRun(item)
-  //     .then
-  // }
-
   _keyExtractor = (item) => item._id
 
 
@@ -62,7 +50,7 @@ export default class Runs extends Component {
       <View style={styles.container}>
         {
           // this.state.runs !== undefined &&
-          // this.state.runs.map(run => (
+          // this.state.runs.map(run => ( 
           //   <Text>{run.name}</Text>
           // ))
           this.state.runs !== undefined &&
@@ -91,7 +79,6 @@ export default class Runs extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
     backgroundColor: "#ebf0f7"
   },
   contentList: {

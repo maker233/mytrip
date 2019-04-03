@@ -5,7 +5,7 @@ import {
   View,
   Image,
   TouchableOpacity,
-  FlatList,
+  FlatList, 
   Dimensions,
   Alert,
   ScrollView
@@ -24,7 +24,7 @@ export default class RunCard extends React.Component {
     this.service = new RunService();
   }
 
-  goToRun = () => this.props.navigation.navigate('Run', {itemId: this.props._id});
+  // goToRun = () => this.props.navigation.navigate('Run', {itemId: this.props._id});
 
   // gotoRun = (run) => {
   //   Alert.alert('Message', 'Item clicked. '+this.props._id),
@@ -43,7 +43,7 @@ export default class RunCard extends React.Component {
     // console.log("hola",this.props)
     return (
       
-            <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate('Run', {itemId: this.props._id})}> 
+            <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate('Run', {itemId: this.props})}> 
               <Image style={styles.image} source={{uri: this.props.photo}}/>
               <View style={styles.cardContent}>
                 <Text style={styles.name}>   {this.props.name}</Text>

@@ -8,7 +8,8 @@ import {
   FlatList,
   Dimensions,
   Alert,
-  ScrollView
+  ScrollView,
+  ProgressBarAndroid
 } from 'react-native';
 
 import RunService from '../../services/runService';
@@ -33,7 +34,8 @@ export default class Run extends Component {
       }
     };
     this.service = new RunService();
-  }
+    this.props = props
+  } 
 
   componentDidMount() {
     console.log("COMPONENTE RUN MONTADO", this.props._id)
@@ -61,13 +63,22 @@ export default class Run extends Component {
 
 
   render() {
-    var mainImage = (this.state.selectedImage) ? this.state.selectedImage: this.state.product.images[0]; 
+
+
+    const { navigation } = this.props;
+    const itemId = navigation.getParam('itemId', 'NO-ID')
+    let prog = itemId.distance / (itemId.completedistance*100000)
+    console.log(prog)
+    // let prog = JSON.stringify( itemId.distance ) / JSON.stringify( itemId.completedistance )
+    // const itemId = navigation.getParam('itemId', 'NO-ID');
+    // console.log(this.props)
+    let mainImage = (this.state.selectedImage) ? this.state.selectedImage: this.state.product.images[0]; 
     return (
       <View style={styles.container}>
         <ScrollView style={styles.content}>
           <View style={styles.card}>
             <View style={styles.cardHeader}>
-              <Text style={styles.name}>{this.state.product.name}</Text>
+              <Text style={styles.name}>{itemId.name}</Text>
             </View>
             <View style={styles.cardContent}>
               <View style={styles.header}>
@@ -83,18 +94,38 @@ export default class Run extends Component {
             <View style={styles.cardHeader}>
               <Text style={styles.cardTitle}>Description</Text>
             </View>
+
             <View style={styles.cardContent}>
-              <Text style={styles.description}>{this.state.product.description}</Text>
+              <Text style={styles.description}>{itemId.description}</Text>
+            </View>
+            
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardTitle}>Avance</Text>
+            </View>  
+            <View style={styles.progressbar}>
+                <ProgressBarAndroid
+                  styleAttr="Horizontal"
+                  indeterminate={false}
+                  progress={prog}
+                  color="#2196F3"
+                />
             </View>
           </View>
 
           <View style={styles.card}>
             <View style={styles.cardContent}>
-              <TouchableOpacity style={styles.shareButton} onPress={()=> this.props.navigation.navigate("RunsStack")}>
+              <TouchableOpacity style={styles.shareButton} onPress={()=> this.props.navigation.navigate("RankRunStack")}>
                 <Text style={styles.shareButtonText}>VER RANKING</Text>  
+              </TouchableOpacity>
+              
+              <TouchableOpacity style={styles.shareButton} onPress={()=> Alert.alert('Message', JSON.stringify( prog ))}>
+                <Text style={styles.shareButtonText}>VER ALGO</Text>  
               </TouchableOpacity>
             </View>
           </View>
+          
+    
+
         </ScrollView>
       </View>
     );
@@ -104,13 +135,12 @@ export default class Run extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    marginTop:20,
     backgroundColor:"#ebf0f7",
   },
   content:{
     marginLeft:10,
     marginRight:10,
-    marginTop:20,
+    marginTop:10,
   },
   header:{
     flexDirection:'row',
@@ -141,6 +171,12 @@ const styles = StyleSheet.create({
     fontSize:22,
     color:"#696969",
     fontWeight:'bold',
+  },
+  progressbar:{
+    fontSize:50,
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 10
   },
   price:{
     marginTop:10,

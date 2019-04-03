@@ -23,8 +23,8 @@ import RunTabNavigator from './RunNavigator';
 import MainTabNavigator from './MainTabNavigator';
 
 
-const LoginNavigator = createStackNavigator({ Login: LoginScreen });
-const SigninNavigator = createStackNavigator({ Signin: SigninScreen });
+const AuthNavigation = createStackNavigator({ Login: LoginScreen, Signin: SigninScreen });
+
 
 const EditProfileNavigator = createStackNavigator({ EditProfile: EditProfileScreen });
 const StepsNavigator = createStackNavigator({ Steps: StepsScreen });
@@ -32,10 +32,9 @@ const CameraNavigator = createStackNavigator({ Camera: CameraScreen });
 
 const RunCardNavigator = createStackNavigator({ RunCard: RunCardScreen });
 const CreateRunNavigator = createStackNavigator({ CreateRun: CreateRunScreen });
-const RunsNavigator = createStackNavigator({ Runs: RunsScreen });
-const RunNavigator = createStackNavigator({ Run: RunScreen });
+const RunsNavigator = createStackNavigator({ Runs: RunsScreen, Run: RunScreen, RankRun: RankRunScreen });
 const MyRunsNavigator = createStackNavigator({ MyRuns: MyRunsScreen });
-const RankRunNavigator = createStackNavigator({ RankRun: RankRunScreen });
+// const RankRunNavigator = createStackNavigator({ RankRun: RankRunScreen });
 const StatsNavigator = createStackNavigator({ Stats: StatsScreen });
 
 // const StepsNavigator = createStackNavigator({ Steps: StepScreen });
@@ -49,12 +48,10 @@ export default createAppContainer(createSwitchNavigator({
   RunTab: RunTabNavigator,
   CreateRun: CreateRunNavigator,
   Runs: RunsNavigator,
-  Run: RunNavigator,
   MyRuns: MyRunsNavigator,
-  RankRun: RankRunNavigator,
+  // RankRun: RankRunNavigator,
 
-  Login: LoginNavigator,
-  Signin: SigninNavigator,
+  Auth: AuthNavigation,
   EditProfile: EditProfileNavigator,
   Steps: StepsNavigator,
   Camera: CameraNavigator,
@@ -63,10 +60,6 @@ export default createAppContainer(createSwitchNavigator({
 
   // Steps: StepsNavigator,
 },{
-  initialRouteName: 'Main'
+  initialRouteName: 'RunTab'
 }))
-
-// duda auth react native
-setUser = (userObj) => {
-  this.setState({loggedInUser: userObj})
-}
+console.disableYellowBox = true;

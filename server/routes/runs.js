@@ -59,7 +59,7 @@ router.post('/updateRunDistance', (req, res, next) => {
       }))
     })
     .then(msg => {
-      console.log(msg);
+      // console.log(msg);
       res.json({ msg: "ok" })
     })
     .catch(err => console.log(err))
