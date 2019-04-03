@@ -28,7 +28,7 @@ export default class PedometerSensor extends React.Component {
 
     Pedometer.isAvailableAsync().then(
       result => {
-        this.setState({
+        this.setState({ 
           isPedometerAvailable: String(result)
         });
       },

@@ -16,7 +16,7 @@ import RunCard from './RunCard'
 
 import RunService from '../../services/runService';
 
-export default class Craigslist extends Component {
+export default class Runs extends Component {
 
   constructor(props) {
     super(props);
@@ -36,7 +36,7 @@ export default class Craigslist extends Component {
         this.setState({
           runs: response
         })
-        console.log("COMPONENTE RUNS MONTADO")
+        // console.log("COMPONENTE RUNS MONTADO")
         // console.log(this.state.runs)
       })
   }

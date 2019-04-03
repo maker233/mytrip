@@ -10,12 +10,15 @@ import {
   ListView
 } from 'react-native';
 
+import RunService from '../../services/runService';
+
 export default class UsersView extends Component {
 
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      usersranked: [],
       dataSource: ds.cloneWithRows([
          {image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"johndoe1"},
          {image: "https://bootdey.com/img/Content/avatar/avatar2.png", username:"johndoe2"},
@@ -28,7 +31,20 @@ export default class UsersView extends Component {
          {image: "https://bootdey.com/img/Content/avatar/avatar6.png", username:"johndoe2"},
       ]),
     };
+    this.service = new RunService();
   }
+
+  componentDidMount() {
+    this.service.getUsersRanked(this.props._id)
+    .then(response => {
+      this.setState({
+        usersranked: response
+      })
+      console.log("COMPONENTE RankRun MONTADO, el id es: ", this.props.id)
+      // console.log(this.state.runs)
+    })
+  }
+    
 
   render() {
     return (

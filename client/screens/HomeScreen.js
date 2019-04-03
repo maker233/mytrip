@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import Expo from "expo";
+import React from "react";
+import { Pedometer, registerRootComponent } from "expo";
+
 import {
   StyleSheet,
   Text,
@@ -6,37 +9,79 @@ import {
   Image,
 } from 'react-native';
 
-import AuthService from '../services/authService';
+import NativeService from '../services/nativeService';
 
-export default class HomeMenuView extends Component {
-
-  constructor() {
+export default class PedometerSensor extends React.Component {
+  constructor(){
     super()
-    this.state= {}
-    this.service = new AuthService()
+    this.state = {
+      isPedometerAvailable: "checking",
+      pastStepCount: 0,
+      currentStepCount: 0
+    };
+  this.service = new NativeService()
+  } 
+
+  
+  componentDidMount() {
+    this._subscribe();
+    this.keepSteps();
   }
 
-  componentDidMount() {
-    console.log("HomeScreen montado")
-    this.service.getUser()
-    .then(response => console.log(response))
+  keepSteps = () => {
+    this.service.sayHello();
+    this.service.saveSteps(this.state.pastStepCount)
   }
+
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  _subscribe = () => {
+    this._subscription = Pedometer.watchStepCount(result => {
+      this.setState({
+        currentStepCount: result.steps
+      });
+    });
+
+    Pedometer.isAvailableAsync().then(
+      result => {
+        this.setState({ 
+          isPedometerAvailable: String(result)
+        });
+      },
+      error => {
+        this.setState({
+          isPedometerAvailable: "Could not get isPedometerAvailable: " + error
+        });
+      }
+    );
+
+    const end = new Date();
+    const start = new Date();
+    start.setDate(end.getDate() - 1);
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        this.setState({ pastStepCount: result.steps });
+      },
+      error => {
+        this.setState({
+          pastStepCount: "Could not get stepCount: " + error
+        });
+      }
+    );
+  };
+
+  _unsubscribe = () => {
+    this._subscription && this._subscription.remove();
+    this._subscription = null;
+  };
 
   render() {
-
     return (
+      <View>
       <View style={styles.container}>
-        <View style={styles.welcomeContainer}>
-            {/* <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            /> */}
-            
-          </View>
 
         <View style={styles.menuBox}>
           <Image style={styles.icon} source={{uri: 'https://png.icons8.com/cell-phone/dusk/50/ffffff'}}/>
@@ -68,31 +113,45 @@ export default class HomeMenuView extends Component {
           <Text style={styles.info}>Order</Text>
         </View>
 
-        <View style={styles.menuBox}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/notification/dusk/50/ffffff'}}/>
-          <Text style={styles.info}>Info</Text>
         </View>
 
-        <View style={styles.menuBox}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/profile/color/50/ffffff'}}/>
-          <Text style={styles.info}>Profile</Text>
+
+
+      
+        <View style={styles.container2}>
+          <Text>
+            Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}
+          </Text>
+          <Text>
+            Steps taken in the last 24 hours: {this.state.pastStepCount}
+          </Text>
+          <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text>
+          
+        </View>
         </View>
 
-        <View style={styles.menuBox}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/friends/color/50/ffffff'}}/>
-          <Text style={styles.info}>Friends</Text>
-        </View>
-
-      </View>
+      
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
+    flex: 1,
+    marginTop: 15,
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop:40,
     flexDirection: 'row',
     flexWrap: 'wrap'
+  },
+  container2: {
+    flex: 1,
+    marginTop: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop:340,
+    
   },
   menuBox:{
     backgroundColor: "#DCDCDC",
@@ -111,3 +170,5 @@ const styles = StyleSheet.create({
     color: "#696969",
   }
 });
+
+registerRootComponent(PedometerSensor);

@@ -82,6 +82,9 @@ app.use('/api', runRoutes);
 
 const usersRoutes = require('./routes/users');
 app.use('/api', usersRoutes);
+
+const nativeRoutes = require('./routes/native');
+app.use('/api', nativeRoutes);
       
 
 module.exports = app;

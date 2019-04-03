@@ -24,23 +24,26 @@ export default class RunCard extends React.Component {
     this.service = new RunService();
   }
 
-  gotoRun = (run) => {
-    // Alert.alert('Message', 'Item clicked. '+this.props._id),
-    this.props.navigation.navigate("Main")
-  }
+  goToRun = () => this.props.navigation.navigate('Run', {itemId: this.props._id});
+
+  // gotoRun = (run) => {
+  //   Alert.alert('Message', 'Item clicked. '+this.props._id),
+  //   () => this.props.navigation.navigate("Main")
+  // }
 
   addMeRun = (run) => {
     // Alert.alert(item.id)
+    let percent = (this.props.completedistance / this.props.distance)*100
     console.log(`Click en APUNTARME, este es el id:  `+this.props._id)
     this.service.addMeRun(run)
-      .then((response) => {Alert.alert('Message', 'Te has unido a la ruta '+this.props.name)}
+      .then((response) => {Alert.alert('Message', 'Te has unido a la ruta '+this.props.name+' , estáis al '+percent+'% de la ruta, ¡Ánimo!')}
       )}
 
   render() {
     // console.log("hola",this.props)
     return (
       
-            <TouchableOpacity style={styles.card} onPress={() => {this.gotoRun(this.props._id)}}>
+            <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate('Run', {itemId: this.props._id})}> 
               <Image style={styles.image} source={{uri: this.props.photo}}/>
               <View style={styles.cardContent}>
                 <Text style={styles.name}>   {this.props.name}</Text>
@@ -109,10 +112,10 @@ const styles = StyleSheet.create({
     color:"#6666ff"
   },
   followButton: {
-    marginTop:10,
+    marginTop:5,
     height:35,
-    width:220,
-    padding:10,
+    width:200,
+    padding:15,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -120,11 +123,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth:1,
     borderColor:"#000000",
-    color:"#000000",
-    fontWeight:'bold'
+    
   },
   followButtonText:{
-    color: "#dcdcdc",
+    color:"#000000",
+    fontWeight:'bold',
     fontSize:12,
   },
   cardContent: {

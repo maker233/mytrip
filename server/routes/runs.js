@@ -3,13 +3,14 @@ const router = express.Router();
 
 const Run = require('../models/Run')
 
-router.get("/", (req, res) => {
-  res.json({msg:"Pepe"});
-})
-
-
 router.get('/getAllRuns', (req, res, next) => {
   Run.find()
+    .then(data => res.json(data))
+    .catch(err => console.log(err))
+})
+
+router.get('/getMyRuns', (req, res, next) => {
+  Run.find({"users": req.user.id})
     .then(data => res.json(data))
     .catch(err => console.log(err))
 })
@@ -23,12 +24,18 @@ router.post("/createRun", (req, res) => {
 })
 
 
-
-router.get("/getOneRun/:id", (req, res) => {
-  Run.findById(req.params.id)
+router.post("/getUsersRanked", (req, res) => {
+  Run.findById(req.body.id)
+  .populate(`users`)
     .then(data => res.json(data))
     .catch(err => console.log(err))
 })
+
+// router.get("/getOneRun/:id", (req, res) => {
+//   Run.findById(req.params.id)
+//     .then(data => res.json(data))
+//     .catch(err => console.log(err))
+// })
 
 router.post("/addMeRun", (req, res) => {
   // console.log(req.user.id)
@@ -41,3 +48,15 @@ router.post("/addMeRun", (req, res) => {
 
 
 module.exports = router;
+
+
+
+
+// router.post('/', (req, res, next) => {
+  
+//   Run.find({"users": req.user.id})
+//   .populate(`users`)
+//   .populate({path : 'comments', populate : {path : 'author'}}) 
+//     .then(response => response)
+
+//     })

@@ -3,27 +3,25 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from '../screens/Profile';
 
 
 import RankRunScreen from '../screens/Runs/RankRun';
 import RunsScreen from '../screens/Runs/Runs';
 import ChatScreen from '../screens/Runs/Chat';
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+
+
+const ChatStack = createStackNavigator({
+  Chat: ChatScreen,
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Volver',
+ChatStack.navigationOptions = {
+  tabBarLabel: 'Chat',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={Platform.OS === 'ios' ? 'ios-man' : 'md-man'}
     />
   ),
 };
@@ -56,13 +54,12 @@ RunsStack.navigationOptions = {
   ),
 };
 
-
-const ChatStack = createStackNavigator({
-  Chat: ChatScreen,
+const ProfileStack = createStackNavigator({
+  Profile: ProfileScreen,
 });
 
-ChatStack.navigationOptions = {
-  tabBarLabel: 'Chat',
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Perfil',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -74,9 +71,11 @@ ChatStack.navigationOptions = {
 
 
 
+
 export default createBottomTabNavigator({
-  HomeStack,
+  ChatStack,
   RankRunStack,
   RunsStack,
-  ChatStack,
+  ProfileStack,
+  
 });

@@ -8,58 +8,65 @@ import {
   TouchableHighlight
 } from 'react-native'; 
 
-import EditProfile from '../screens/EditProfile'
+import UserService from '../services/userService';
 
 export default class Profile extends Component {
 
   constructor(props){
     super(props);
-    state = {
+    this.state = {
       name: '',
       username:'',
       bio:'',
       photo:''
     }
+    this.service = new UserService();
 
   }
 
-  // componentDidMount() {
-  //   // this.service.getOneUser(this.props.match.params.id)
-  //   this.service.getOneUser("5ca1e5cdd5ef5d10af5fd51f")
-  //     .then(response => {
-  //       console.log(response.bio)
-  //       this.setState({ 
-  //         name: response.name,
-  //         username: response.username,
-  //         password: response.password,
-  //         bio: response.bio,
-  //         photo:response.photo
-  //        })
-  //     })
+  componentDidMount() {
+    console.log("Componente EditProfile montado")
+    
+        this.service.getOneUser()
+        .then(response => {
+          // console.log(response.name)
+          this.setState({ 
+            name: response.name,
+            username: response.username,
+            password: response.password,
+            bio: response.bio,
+            photo:response.photo
+           })
+        })
+  }
+
+  // logout = () => {
+  //   this.service.logout()
+  //   ,() => this.props.navigation.navigate("Login")
   // }
 
   render() {
     return (
       <View style={styles.container}>
           <View style={styles.header}></View>
-          <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+          <Image style={styles.avatar} source={{uri: this.state.photo}}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>John Doe</Text>
+              <Text style={styles.name}>{this.state.name}</Text>
               <Text style={styles.info}>UX Designer / Mobile developer</Text>
-              <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
+              <Text style={styles.description}>{this.state.bio}</Text>
               
               <TouchableOpacity style={styles.buttonContainer} 
                 onPress={ () => this.props.navigation.navigate("EditProfile")}>
                 <Text>Editar Perfil</Text>  
               </TouchableOpacity>              
               <TouchableOpacity style={styles.buttonContainer}
-                onPress={ () => this.props.navigation.navigate("EditProfile")}>
+                onPress={ () => this.props.navigation.navigate("MyRuns")}>
                 <Text>Mis Rutas</Text> 
               </TouchableOpacity>
 
               <TouchableHighlight style={styles.buttonContainer} 
-                onPress={() => this.props.navigation.navigate("HomeScreen")}>
+                onPress={() => this.props.navigation.navigate("Camera")}>
                 <Text>Hacer Foto</Text>
               </TouchableHighlight>
 
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
   },
   name:{
     fontSize:22,
-    color:"#FFFFFF",
+    color:"#000000",
     fontWeight:'600',
   },
   body:{

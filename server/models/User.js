@@ -5,8 +5,8 @@ const userSchema = new Schema({
   name: { type: String, default: "Popino, the Dogtor" },
   username: String,
   password: String,
-  bio: { type: String, default: "Ayer se fue tomo sus cosas y se puso a navegar una camisa un pantalon vaquero y una cancion donde ira, donde ira y decidio batirse en duelo con el mar y recorer el mundo en su velero y navegar laylala navegar." },
-  photo: { type: String, default: "/images/popino.jpg" },
+  bio: { type: String, default: "Ayer se fue tomo sus cosas y se puso a navegar una camisa un pantalon vaquero y una cancion donde ira." },
+  photo: { type: String, default: "https://bootdey.com/img/Content/avatar/avatar2.png" },
   stepstoday: { type: Number, default: 0 }
 
 }, { timestamps: true });
