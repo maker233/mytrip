@@ -7,35 +7,43 @@ import {
   Button,
   TouchableOpacity,
   Image,
-  Alert
+  Alert,
+  ImageBackground
 } from 'react-native';
+import AuthSession from 'expo/build/AuthSession';
 
 export default class I extends Component {
   render() {
     return (
 
-      <View style={styles.container}>
-        <View style={styles.space}>
-          <Image style={styles.welcomeImage} source={{uri: 'https://cdn.dribbble.com/users/449035/screenshots/5612222/mr_worldwide.gif'}}/>
+      <ImageBackground source={{uri: 'http://i.imgur.com/IGlBYaC.jpg'}} style={{width: '100%', height: '100%'}}>
+        {/* <View> */}
+          <View >
           
-        </View>
+            
+            <View style={styles.space}>
+              <Image style={styles.welcomeImage} source={{uri: 'https://cdn.dribbble.com/users/449035/screenshots/5612222/mr_worldwide.gif'}}/>
+              
+            </View>
 
 
-        <View style={styles.space}>
-          <Text>BIENVENIDO A MyTrip</Text> 
-        </View>
+            <View style={styles.space}>
+              <Text>BIENVENIDO A MyTrip</Text> 
+            </View>
 
-        <TouchableOpacity style={styles.button} onPress={()=> this.props.navigation.navigate("Intro2")}>
-          <Text style={styles.buttonText}>NEXT</Text>  
-        </TouchableOpacity>
-       
+            <TouchableOpacity style={styles.shareButton} onPress={()=> this.props.navigation.navigate("Intro2")}>
+              <Text style={styles.shareButtonText}>NEXT</Text>  
+            </TouchableOpacity>
+          
 
-        <TouchableOpacity style={styles.shareButton} onPress={()=> this.props.navigation.navigate("Main")}>
-          <Text style={styles.buttonText}>SKIP</Text>  
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.shareButton} onPress={()=> this.props.navigation.navigate("Main")}>
+              <Text style={styles.shareButtonText}>SKIP</Text>  
+            </TouchableOpacity>
 
-
-      </View>
+          </View>
+         {/* </View> */}
+      </ImageBackground>
+      
     );
   }
 }
@@ -47,6 +55,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DCDCDC',
   },
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
+},
   inputContainer: {
       borderBottomColor: '#F5FCFF',
       backgroundColor: '#FFFFFF',
@@ -70,10 +83,6 @@ const styles = StyleSheet.create({
     marginLeft:15,
     justifyContent: 'center'
   },
-  buttonText: {
-    color: "#FFFFFF",
-    fontSize:20,
-  },
   buttonContainer: {
     height:45,
     flexDirection: 'row',
@@ -83,7 +92,7 @@ const styles = StyleSheet.create({
     width:250,
     borderRadius:30,
   },
-  button: {
+  shareButton: {
     marginTop:10,
     height:45,
     flexDirection: 'row',
@@ -92,17 +101,24 @@ const styles = StyleSheet.create({
     borderRadius:30,
     backgroundColor: "#00BFFF",
   },
+  shareButtonText:{
+    color: "#FFFFFF",
+    fontSize:20,
+  },
   loginText: {
     color: 'white',
   },
   space: {
-    marginBottom:20
+    marginBottom:20,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   welcomeImage: {
     width: 300,
     height: 180,
     resizeMode: 'contain',
-    marginTop: -50,
-    marginLeft: 0,
+    marginTop: 0,
+   
+ 
   },
 });

@@ -10,13 +10,16 @@ import {
   Alert,
   ScrollView,
   ProgressBarAndroid,
-  StatusBar
+  StatusBar,
+  ImageBackground
 } from 'react-native';
 
 export default class IntroTwo extends Component {
 
   render() {
     return (
+      <ImageBackground source={{uri: 'http://i.imgur.com/IGlBYaC.jpg'}} style={{width: '100%', height: '100%'}}>
+        
       <View>
         <Text> PANTALLA 2 </Text>
         <Image style={styles.welcomeImage} source={{uri: 'https://cdn.dribbble.com/users/449035/screenshots/5612222/mr_worldwide.gif'}}/>
@@ -32,6 +35,7 @@ export default class IntroTwo extends Component {
         </TouchableOpacity>
         
       </View>
+      </ImageBackground>
     )
   }
 }

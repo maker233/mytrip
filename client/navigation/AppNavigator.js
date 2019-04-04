@@ -70,11 +70,11 @@ export default createAppContainer(createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
   Main: MainTabNavigator,
+  RunTab: RunTabNavigator,
   
   Intro: IntroNavigator,
 
   RunCard: RunCardNavigator,
-  RunTab: RunTabNavigator,
   CreateRun: CreateRunNavigator,
   Runs: RunsNavigator,
   MyRuns: MyRunsNavigator,
@@ -89,6 +89,6 @@ export default createAppContainer(createSwitchNavigator({
 
   // Steps: StepsNavigator,
 },{
-  initialRouteName: 'Auth'
+  initialRouteName: 'Intro'
 }))
 console.disableYellowBox = true;

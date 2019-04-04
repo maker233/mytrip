@@ -34,20 +34,23 @@ export default class RunCard extends React.Component {
   addMeRun = (run) => {
     // Alert.alert(item.id)
     let percent = (this.props.completedistance / this.props.distance)*100
+    let percentflat = Math.floor(percent).toFixed(0)
+    
     console.log(`Click en APUNTARME, este es el id:  `+this.props._id)
     this.service.addMeRun(run)
-      .then((response) => {Alert.alert('Message', 'Te has unido a la ruta '+this.props.name+' , estáis al '+percent+'% de la ruta, ¡Ánimo!')}
+      .then((response) => {Alert.alert('Message', 'Te has unido a la ruta '+this.props.name+' , estáis al '+percentflat+'% de la ruta, ¡Ánimo!')}
       )}
 
   render() {
     // console.log("hola",this.props)
+    let complettedistancekm = Math.floor(this.props.completedistance*0.7)
     return (
       
             <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate('Run', {itemId: this.props._id})}> 
               <Image style={styles.image} source={{uri: this.props.photo}}/>
               <View style={styles.cardContent}>
                 <Text style={styles.name}>   {this.props.name}</Text>
-                <Text style={styles.count}>Pasos: {this.props.completedistance}</Text>
+                <Text style={styles.count}>Km recorridos: {complettedistancekm}</Text>
                 <TouchableOpacity style={styles.followButton} onPress={()=> {this.addMeRun(this.props._id)}}>
                   <Text style={styles.followButtonText}>APUNTARME</Text>  
                 </TouchableOpacity>

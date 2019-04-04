@@ -73,8 +73,8 @@ ProfileStack.navigationOptions = {
 
 
 export default createBottomTabNavigator({
-  ChatStack,
   RankRunStack,
+  ChatStack,
   RunsStack,
   ProfileStack,
   

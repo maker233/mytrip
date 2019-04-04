@@ -69,11 +69,14 @@ export default class Run extends Component {
     const { navigation } = this.props;
     const itemId = navigation.getParam('itemId', 'NO-ID')
     let prog = itemId.distance / (itemId.completedistance*100000)
+    
+    //let percentflat = Math.floor(percent).toFixed(0)
     console.log(prog)
     // let prog = JSON.stringify( itemId.distance ) / JSON.stringify( itemId.completedistance )
     // const itemId = navigation.getParam('itemId', 'NO-ID');
     // console.log(this.props)
     let mainImage = (this.state.selectedImage) ? this.state.selectedImage: this.state.product.images[0]; 
+    let complettedistancekm = Math.floor(this.props.completedistance*0.7)
     return (
     
       <View style={styles.container}>
@@ -82,6 +85,8 @@ export default class Run extends Component {
           <View style={styles.card}>
             <View style={styles.cardHeader}>
               <Text style={styles.name}>{itemId.name}</Text>
+              <Text style={styles.cardTitle}>Distancia: {itemId.distance} Km</Text>
+
             </View>
             <View style={styles.cardContent}>
               <View style={styles.header}>
@@ -94,15 +99,7 @@ export default class Run extends Component {
           </View>
 
           <View style={styles.card}>
-            <View style={styles.cardHeader}>
-              <Text style={styles.cardTitle}>Description</Text>
-            </View>
-
-            <View style={styles.cardContent}>
-              <Text style={styles.description}>{itemId.description}</Text>
-            </View>
-            
-            <View style={styles.cardHeader}>
+          <View style={styles.cardHeader}>
               <Text style={styles.cardTitle}>Avance</Text>
             </View>  
             <View style={styles.progressbar}>
@@ -113,6 +110,15 @@ export default class Run extends Component {
                   color="#2196F3"
                 />
             </View>
+
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardTitle}>Descripción</Text>
+            </View>
+
+            <View style={styles.cardContent}>
+              <Text style={styles.description}>{itemId.description}</Text>
+            </View>
+
           </View>
           
           <View style={styles.card}>
@@ -123,10 +129,10 @@ export default class Run extends Component {
               <MapView
               style={{ flex: 1 }}
               initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitude: itemId.lat,
+                longitude: itemId.lon,
+                latitudeDelta: 10,
+                longitudeDelta: 10,
               }}
             />
 
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
   },
   mainImage:{
-    width:200,
+    width:250,
     height:200,
   },
   smallImagesContainer:{

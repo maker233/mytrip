@@ -8,9 +8,9 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.1.6",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icon-main.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
