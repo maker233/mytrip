@@ -31,18 +31,18 @@ export default class LoginView extends Component {
   onSubmitListener = (event) => {
     // console.log(this.state)
 
-    this.service.sayHello()
+    // this.service.sayHello()
     
-    // const username = this.state.username;
-    // const password = this.state.password;
-    // this.service.login(username, password)
-    //     .then(response => {
-    //         this.setState({ email: "", password: "" }, ()=> this.props.navigation.navigate("Main"));
-    //         // this.props.setUser(response),
-    //         // () => 
+    const username = this.state.username;
+    const password = this.state.password;
+    this.service.login(username, password)
+        .then(response => {
+            this.setState({ email: "", password: "" }, ()=> this.props.navigation.navigate("Main"));
+            // this.props.setUser(response),
+            // () => 
             
-    //     })
-    //     .catch(error => console.log(error))
+        })
+        .catch(error => console.log(error))
 }
 
   render() {

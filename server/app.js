@@ -30,10 +30,10 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
-// app.use(cors({
-//   credentials: true,
-//   origin: ['http://192.168.43.136:19000'] // <== this will be the URL of our React app (it will be running on port 3000)
-// }));
+app.use(cors({
+  credentials: true,
+  origin: [process.env.FRONT] // <== this will be the URL of our React app (it will be running on port 3000)
+}));
 
 // Middleware Setup
 app.use(logger('dev'));

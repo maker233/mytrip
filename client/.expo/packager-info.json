@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 1836,
+  "expoServerNgrokUrl": "https://9g-pq2.makerdev.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.9g-pq2.makerdev.client.exp.direct",
+  "ngrokPid": 1857,
+  "webpackServerPort": null
 }
