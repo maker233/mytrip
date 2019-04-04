@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { MapView } from 'expo';
 import {
   StyleSheet,
   Text,
@@ -74,7 +75,9 @@ export default class Run extends Component {
     // console.log(this.props)
     let mainImage = (this.state.selectedImage) ? this.state.selectedImage: this.state.product.images[0]; 
     return (
+    
       <View style={styles.container}>
+      
         <ScrollView style={styles.content}>
           <View style={styles.card}>
             <View style={styles.cardHeader}>
@@ -111,6 +114,24 @@ export default class Run extends Component {
                 />
             </View>
           </View>
+          
+          <View style={styles.card}>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardTitle}>¿Dónde estamos?</Text>
+            </View>
+            <View style={styles.mapcontainer}>
+              <MapView
+              style={{ flex: 1 }}
+              initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            />
+
+            </View>
+          </View>
 
           <View style={styles.card}>
             <View style={styles.cardContent}>
@@ -135,12 +156,19 @@ export default class Run extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:"#ebf0f7",
+    backgroundColor:"#475c7a",
   },
   content:{
     marginLeft:10,
     marginRight:10,
     marginTop:10,
+  },
+  mapcontainer: {
+    paddingHorizontal: 10,
+    paddingBottom: 20,
+    width:380,
+    height:200,
+    
   },
   header:{
     flexDirection:'row',

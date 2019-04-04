@@ -1,11 +1,12 @@
 import axios from "axios";
+import urlBack from "../services/urlBack"
 
 export default class runService {
 
     constructor() {
 
         this.service = axios.create({
-            baseURL: "http://192.168.43.136:3000/api/",
+            baseURL: urlBack,
             withCredentials: true
         })
     }

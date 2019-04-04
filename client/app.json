@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "mytrip",
+    "name": "MyTrip",
     "slug": "mytrip",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -22,8 +22,13 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.velatristudio.mytrip"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.velatristudio.mytrip"
     }
   }
 }
+

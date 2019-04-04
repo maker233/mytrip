@@ -1,19 +1,24 @@
 import axios from "axios";
+import urlBack from "../services/urlBack"
 
 export default class authService {
 
     constructor() {
 
+        console.log("url",urlBack)
+
         this.service = axios.create({ 
-            baseURL: "http://192.168.43.136:3000/api/",
+            baseURL: urlBack,
             withCredentials: true
         })
     }
 
-    // sayHello = () => {
-    //   return this.service.get('/hello')
-    //   .then(response => response.data) 
-    // }
+    sayHello = () => {
+        console.log("hola")
+      return this.service.get('/hello')
+      .then(response => response.data) 
+    }
+
 
     getUser = () => {
         return this.service.get('/getUser')
@@ -21,7 +26,7 @@ export default class authService {
       }
 
     signup = (name, username, password) => {
-      // console.log(email, password)
+      console.log(username, password)
         return this.service.post('/signup', { name, username, password })
             .then(response => response.data)
             

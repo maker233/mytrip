@@ -7,6 +7,10 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
+router.get("/hello", (req, res)=>{
+    console.log("hola")
+})
+
 router.get("/getUser", (req, res)=>{
     res.json(req.user)
 })

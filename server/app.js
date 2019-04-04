@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const cors = require('cors');
+
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express      = require('express');
@@ -15,7 +17,7 @@ const flash      = require("connect-flash");
     
 
 mongoose
-  .connect('mongodb://localhost/mytrip', {useNewUrlParser: true})
+  .connect(process.env.DBENV, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -27,6 +29,11 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
+// app.use(cors({
+//   credentials: true,
+//   origin: ['http://192.168.43.136:19000'] // <== this will be the URL of our React app (it will be running on port 3000)
+// }));
 
 // Middleware Setup
 app.use(logger('dev'));

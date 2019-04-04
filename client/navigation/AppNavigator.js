@@ -18,13 +18,40 @@ import StepsScreen from "../screens/Steps"
 import CameraScreen from "../screens/Camera"
 import StatsScreen from "../screens/Stats"
 
+import Intro1Screen from "../screens/intro/intro1"
+import Intro2Screen from "../screens/intro/intro2"
+import Intro3Screen from "../screens/intro/intro3"
+
 
 import RunTabNavigator from './RunNavigator';
 import MainTabNavigator from './MainTabNavigator';
 
 
-const AuthNavigation = createStackNavigator({ Login: LoginScreen, Signin: SigninScreen });
+const AuthNavigation = createStackNavigator({ 
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: {header: null}
+  }, 
+  Signin: {
+    screen: SigninScreen,
+    navigationOptions: {header: null}
+  } 
+});
 
+const IntroNavigator = createStackNavigator({ 
+  Intro1: {
+    screen: Intro1Screen,
+    navigationOptions: {header: null}
+  }, 
+  Intro2: {
+    screen: Intro2Screen,
+    navigationOptions: {header: null}
+  },
+  Intro3: {
+    screen: Intro3Screen,
+    navigationOptions: {header: null}
+  }  
+});
 
 const EditProfileNavigator = createStackNavigator({ EditProfile: EditProfileScreen });
 const StepsNavigator = createStackNavigator({ Steps: StepsScreen });
@@ -43,6 +70,8 @@ export default createAppContainer(createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
   Main: MainTabNavigator,
+  
+  Intro: IntroNavigator,
 
   RunCard: RunCardNavigator,
   RunTab: RunTabNavigator,
@@ -60,6 +89,6 @@ export default createAppContainer(createSwitchNavigator({
 
   // Steps: StepsNavigator,
 },{
-  initialRouteName: 'RunTab'
+  initialRouteName: 'Auth'
 }))
 console.disableYellowBox = true;
