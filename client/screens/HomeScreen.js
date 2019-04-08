@@ -1,6 +1,6 @@
 import Expo from "expo";
 import React from "react";
-import { Pedometer, registerRootComponent } from "expo";
+import { Pedometer, registerRootComponent, TouchableHighlight } from "expo";
 
 import {
   StyleSheet,
@@ -90,53 +90,69 @@ export default class PedometerSensor extends React.Component {
     return (
       <View>
       <View style={styles.container}>
+      <View>
+        <Image style={styles.imagehome} source={{uri: 'https://i.imgur.com/Lth2gI7.png'}}/>
+        </View>
 
-        <View style={styles.menuBox}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/cell-phone/dusk/50/ffffff'}}/>
-          <Text style={styles.info}>Intro</Text>
+        <View style={styles.container2}>
+          <Text>
+            ESTOS SON TUS PASOS DE HOY
+          </Text>
+          <Text>¡Aumenta tus pasos para completar las Rutas!</Text>
+          <Text style={styles.pasos}>
+            {this.state.pastStepCount}
+          </Text>
+          
         </View>
 
         <View style={styles.menuBox}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/user-menu-male/color/50/ffffff'}}/>
-          <Text style={styles.info}>Sign In</Text>
+          <Image style={styles.icon} source={{uri: 'https://img.icons8.com/color/48/000000/alps.png'}}/>
+          <Text style={styles.info}>Explora</Text>
+          
+        </View>
+
+        <View style={styles.menuBox}>
+          <Image style={styles.icon} source={{uri: 'https://img.icons8.com/cotton/64/000000/adventures.png'}}/>
+          <Text style={styles.info}>Mi Perfil</Text>
         </View>
 
         <View style={styles.menuBox}>
           <Image style={styles.icon} source={{uri: 'https://png.icons8.com/bar-chart/dusk/50/ffffff'}}/>
-          <Text style={styles.info}>Charts</Text>
+          <Text style={styles.info}>Datos</Text>
         </View>
 
         <View style={styles.menuBox}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/shopping-cart/color/50/ffffff'}}/>
-          <Text style={styles.info}>Cart</Text>
+          <Image style={styles.icon} source={{uri: 'https://img.icons8.com/dusk/64/000000/world-map.png'}}/>
+          <Text style={styles.info}>Crear Ruta</Text>
         </View>
 
         <View style={styles.menuBox}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/product/nolan/50/ffffff'}}/>
-          <Text style={styles.info}>Product</Text>
+          <Image style={styles.icon} source={{uri: 'https://img.icons8.com/cotton/64/000000/world-map.png'}}/>
+          <Text style={styles.info}>Mis Rutas</Text>
         </View>
 
         <View style={styles.menuBox}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/shopping-basket/color/50/ffffff'}}/>
-          <Text style={styles.info}>Order</Text>
+          <Image style={styles.icon} source={{uri: 'https://img.icons8.com/dusk/64/000000/logout-rounded.png'}}/>
+          <Text style={styles.info}>Salir</Text>
         </View>
 
         </View>
 
-
+        
+        </View>
 
       
-        <View style={styles.container2}>
-          <Text>
-            Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}
-          </Text>
-          <Text>
-            Steps taken in the last 24 hours: {this.state.pastStepCount}
-          </Text>
-          <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text>
+        // {/* <View style={styles.container2}>
+        //   <Text>
+        //     Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}
+        //   </Text>
+        //   <Text>
+        //     Steps taken in the last 24 hours: {this.state.pastStepCount}
+        //   </Text>
+        //   <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text>
           
-        </View>
-        </View>
+        // </View>
+        // </View> */}
 
       
     );
@@ -146,19 +162,22 @@ export default class PedometerSensor extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 15,
+    marginTop: 0,
     alignItems: "center",
     justifyContent: "center",
     paddingTop:40,
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    
   },
   container2: {
-    flex: 1,
-    marginTop: 15,
+    
+    marginTop: 80,
+    marginBottom: -10,
     alignItems: "center",
     justifyContent: "center",
-    paddingTop:340,
+    
+    
     
   },
   menuBox:{
@@ -173,10 +192,23 @@ const styles = StyleSheet.create({
     width:60,
     height:60,
   },
+  pasos: {
+    fontSize:40,
+    color: "#0A0A22",
+    
+  },
+  imagehome: {
+    marginTop: -50,
+    marginBottom: 20,
+    width:420,
+    height:300,
+  },
   info:{
-    fontSize:22,
+    fontSize:20,
     color: "#696969",
-  }
+    
+  },
+  
 });
 
 registerRootComponent(PedometerSensor);

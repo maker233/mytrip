@@ -1,124 +1,92 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  TouchableOpacity,
-  Image,
-  Alert,
-  ImageBackground
-} from 'react-native';
-import AuthSession from 'expo/build/AuthSession';
-
-export default class I extends Component {
+import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, View, Text, Image } from 'react-native';
+import { LinearGradient } from 'expo';
+import AppIntroSlider from 'react-native-app-intro-slider';
+ 
+const styles = StyleSheet.create({
+  mainContent: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  image: {
+    width: 320,
+    height: 320,
+  },
+  text: {
+    color: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    paddingHorizontal: 16,
+  },
+  title: {
+    fontSize: 22,
+    color: 'white',
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    marginBottom: 16,
+  }
+});
+ 
+const slides = [
+  {
+    key: 'somethun',
+    title: 'Solo necesitas caminar',
+    img: 'https://img.icons8.com/cotton/100/000000/around-the-globe.png',
+    // image: require('./assets/images/icon.png'),
+    text: '¡Eso es! Simplemente necesitas tus pasos diarios para lograr objetivos y unirte a rutas con tus amigos.',
+    icon: 'md-compass',
+    colors: ['#63E2FF', '#B066FE'],
+  },
+  {
+    key: 'somethun1',
+    title: 'Descubre nuevos lugares',
+    text: 'Da la vuelta al mundo, viaja a la Luna o recorre la Ruta de la Seda. Apúntate y colecciona lugares.',
+    // image: require('./assets/images/icon.png'),
+    icon: 'md-map',
+    colors: ['#A3A1FF', '#3A3897'],
+  },
+  {
+    key: 'somethun2',
+    title: 'Crea tus propias rutas',
+    // image: require('./assets/images/icon.png'),
+    text: 'Crea rutas con tus compañeros del trabajo, tu familia o amigos. Entre todos conseguiréis completar las rutas.',
+    icon: 'md-trophy',
+    colors: ['#29ABE2', '#4F00BC'],
+  },
+];
+ 
+export default class App extends React.Component {
+  _renderItem = props => (
+    <LinearGradient
+      style={[styles.mainContent, {
+        paddingTop: props.topSpacer,
+        paddingBottom: props.bottomSpacer,
+        width: props.width,
+        height: props.height,
+      }]}
+      colors={props.colors}
+      start={{x: 0, y: .1}} end={{x: .1, y: 1}}
+      
+    >
+      {/* <Image source={props.image} /> */}
+      <Ionicons style={{ backgroundColor: 'transparent' }} name={props.icon} size={200} color="white" />
+      <View>
+        <Text style={styles.title}>{props.title}</Text>
+        <Text style={styles.text}>{props.text}</Text>
+      </View>
+    </LinearGradient>
+  );
+ 
   render() {
     return (
-
-      <ImageBackground source={{uri: 'http://i.imgur.com/IGlBYaC.jpg'}} style={{width: '100%', height: '100%'}}>
-        {/* <View> */}
-          <View >
-          
-            
-            <View style={styles.space}>
-              <Image style={styles.welcomeImage} source={{uri: 'https://cdn.dribbble.com/users/449035/screenshots/5612222/mr_worldwide.gif'}}/>
-              
-            </View>
-
-
-            <View style={styles.space}>
-              <Text>BIENVENIDO A MyTrip</Text> 
-            </View>
-
-            <TouchableOpacity style={styles.shareButton} onPress={()=> this.props.navigation.navigate("Intro2")}>
-              <Text style={styles.shareButtonText}>NEXT</Text>  
-            </TouchableOpacity>
-          
-
-            <TouchableOpacity style={styles.shareButton} onPress={()=> this.props.navigation.navigate("Main")}>
-              <Text style={styles.shareButtonText}>SKIP</Text>  
-            </TouchableOpacity>
-
-          </View>
-         {/* </View> */}
-      </ImageBackground>
-      
+      <AppIntroSlider
+        slides={slides}
+        renderItem={this._renderItem}
+        bottomButton
+        onDone = {()=> this.props.navigation.navigate("Auth")}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DCDCDC',
-  },
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null,
-},
-  inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
-      borderRadius:30,
-      borderBottomWidth: 1,
-      width:250,
-      height:45,
-      marginBottom:20,
-      flexDirection: 'row',
-      alignItems:'center'
-  },
-  inputs:{
-      height:45,
-      marginLeft:16,
-      borderBottomColor: '#FFFFFF',
-      flex:1,
-  },
-  inputIcon:{
-    width:30,
-    height:30,
-    marginLeft:15,
-    justifyContent: 'center'
-  },
-  buttonContainer: {
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
-  },
-  shareButton: {
-    marginTop:10,
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius:30,
-    backgroundColor: "#00BFFF",
-  },
-  shareButtonText:{
-    color: "#FFFFFF",
-    fontSize:20,
-  },
-  loginText: {
-    color: 'white',
-  },
-  space: {
-    marginBottom:20,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  welcomeImage: {
-    width: 300,
-    height: 180,
-    resizeMode: 'contain',
-    marginTop: 0,
-   
- 
-  },
-});

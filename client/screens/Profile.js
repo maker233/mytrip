@@ -53,7 +53,7 @@ export default class Profile extends Component {
           <View style={styles.body}>
             <View style={styles.bodyContent}>
               <Text style={styles.name}>{this.state.name}</Text>
-              <Text style={styles.info}>UX Designer / Mobile developer</Text>
+              <Text style={styles.info}>{this.state.username}</Text>
               <Text style={styles.description}>{this.state.bio}</Text>
               
               <TouchableOpacity style={styles.buttonContainer} 

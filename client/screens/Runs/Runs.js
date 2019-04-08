@@ -79,7 +79,7 @@ export default class Runs extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ebf0f7"
+    backgroundColor: "#475c7a"
   },
   contentList: {
     flex: 1,

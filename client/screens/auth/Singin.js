@@ -107,11 +107,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    backgroundColor: 'white',
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '#2E2E64',
       borderRadius:30,
       borderBottomWidth: 1,
       width:250,
@@ -149,5 +149,12 @@ const styles = StyleSheet.create({
   },
   space: {
     marginBottom:20
-  }
+  },
+  welcomeImage: {
+    width: 200,
+    height: 120,
+    resizeMode: 'contain',
+    marginTop: -50,
+    marginLeft: 0,
+  },
 });

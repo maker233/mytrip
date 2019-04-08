@@ -14,8 +14,8 @@ import RunsScreen from '../screens/Runs/Runs';
 import CreateRunScreen from '../screens/Runs/CreateRun';
 import RankRunScreen from '../screens/Runs/RankRun';
 
-import StepsScreen from "../screens/Steps"
-import CameraScreen from "../screens/Camera"
+
+// import CameraScreen from "../screens/Camera"
 import StatsScreen from "../screens/Stats"
 
 import Intro1Screen from "../screens/intro/intro1"
@@ -54,8 +54,7 @@ const IntroNavigator = createStackNavigator({
 });
 
 const EditProfileNavigator = createStackNavigator({ EditProfile: EditProfileScreen });
-const StepsNavigator = createStackNavigator({ Steps: StepsScreen });
-const CameraNavigator = createStackNavigator({ Camera: CameraScreen });
+
 
 const RunCardNavigator = createStackNavigator({ RunCard: RunCardScreen });
 const CreateRunNavigator = createStackNavigator({ CreateRun: CreateRunScreen });
@@ -64,7 +63,7 @@ const MyRunsNavigator = createStackNavigator({ MyRuns: MyRunsScreen });
 // const RankRunNavigator = createStackNavigator({ RankRun: RankRunScreen });
 const StatsNavigator = createStackNavigator({ Stats: StatsScreen });
 
-// const StepsNavigator = createStackNavigator({ Steps: StepScreen });
+
 
 export default createAppContainer(createSwitchNavigator({
   // You could add another route here for authentication.
@@ -82,8 +81,8 @@ export default createAppContainer(createSwitchNavigator({
 
   Auth: AuthNavigation,
   EditProfile: EditProfileNavigator,
-  Steps: StepsNavigator,
-  Camera: CameraNavigator,
+  
+  // Camera: CameraNavigator,
   Stats: StatsNavigator,
   
 

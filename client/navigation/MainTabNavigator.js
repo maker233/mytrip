@@ -10,7 +10,10 @@ import ProfileScreen from '../screens/Profile';
 import RunsScreen from '../screens/Runs/Runs';
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: {header: null}
+  }
 });
 
 HomeStack.navigationOptions = {
@@ -20,8 +23,8 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-home${focused ? '' : '-outline'}`
+          : 'md-home'
       }
     />
   ),
@@ -36,7 +39,7 @@ StatsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-document' : 'md-document'}
+      name={Platform.OS === 'ios' ? 'ios-compass' : 'md-compass'}
     />
   ),
 };
@@ -51,6 +54,8 @@ RunsStack.navigationOptions = {
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-map' : 'md-map'}
+      color="#000000"
+      size={24}
     />
   ),
 };

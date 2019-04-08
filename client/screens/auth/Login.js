@@ -97,11 +97,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    backgroundColor: 'white',
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '#29297D',
       borderRadius:30,
       borderBottomWidth: 1,
       width:250,

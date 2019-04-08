@@ -3,8 +3,8 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://9g-pq2.makerdev.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.9g-pq2.makerdev.client.exp.direct",
+  "ngrokPid": 20225,
   "webpackServerPort": null
 }

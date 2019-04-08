@@ -146,7 +146,7 @@ export default class Run extends Component {
               </TouchableOpacity>
               
               <TouchableOpacity style={styles.shareButton} onPress={()=> Alert.alert('Message', JSON.stringify( prog ))}>
-                <Text style={styles.shareButtonText}>VER ALGO</Text>  
+                <Text style={styles.shareButtonText}>Volver</Text>  
               </TouchableOpacity>
             </View>
           </View>

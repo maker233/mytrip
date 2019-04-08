@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View , StyleSheet} from 'react-native'
 
 export default class Stats extends Component {
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text> textInComponent </Text>
         <Text> Hoy has recorrido 3,2 kilometros</Text>
         <Text> Tardarías en llegar a la Luna 6543 años </Text>
@@ -17,3 +17,11 @@ export default class Stats extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:"#475c7a",
+    color: "white"
+  }
+});  

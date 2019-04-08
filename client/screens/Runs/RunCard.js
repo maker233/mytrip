@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     padding: 10,
     flexDirection:'row',
-    borderRadius:30,
+    borderRadius:0,
   },
 
   name:{
